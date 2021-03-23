@@ -1,6 +1,6 @@
 # Web Development Final Project 
 
-## Project name : Food recipe webite - SPOONFUL
+## Project name : Food recipe website - SPOONFUL
 
 ### Teammates : Sindhu Somasundaram, Juan Ong, Santosh Shenoy
 
