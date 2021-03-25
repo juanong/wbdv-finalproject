@@ -15,7 +15,6 @@ const RecipeBody = ({recipe}) => {
     // Grab the recipe summary, use only the first two sentences, and remove any HTML elements
     if (recipe.summary && typeof recipe.summary) {
         const summary = recipe.summary
-        const summary_short = (summary.split(".", 2)).join(". ")
         summary_formatted = summary.replace(/(<([^>]+)>)/gi, "")
     }
 
@@ -28,7 +27,7 @@ const RecipeBody = ({recipe}) => {
             </div>
             <div>
                 <h4>Description</h4>
-                {summary_formatted + "."}
+                {summary_formatted}
             </div>
             <div className="separation-padding">
                 <h4>Ingredients</h4>
