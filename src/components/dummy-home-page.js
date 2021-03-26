@@ -26,6 +26,11 @@ const DummyHomePage = () => {
                         Recipe 3
                     </li>
                 </Link>
+                <Link to={`/${username}/profile`}>
+                    <li>
+                        Profile
+                    </li>
+                </Link>
             </ul>
         </div>
     )

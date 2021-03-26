@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import LandingPage from "./landing-page/landing-page";
 import {Route, Redirect} from 'react-router-dom'
 import LoginPage from "./login-page/login-page";
@@ -7,6 +7,8 @@ import DummyHomePage from "./dummy-home-page";
 import recipePageReducer from "../reducers/recipe-page-reducer"
 import {createStore} from "redux";
 import {Provider} from "react-redux";
+import AddRecipePage from "./add-recipe-page/add-recipe-page";
+import Profile from "./profile/profile";
 
 const store = createStore(recipePageReducer)
 
@@ -26,6 +28,12 @@ const WebManager = () => {
                 </Route>
                 <Route path="/home/:username">
                     <DummyHomePage/>
+                </Route>
+                <Route path="/:username/add/recipe">
+                    <AddRecipePage/>
+                </Route>
+                <Route path="/:username/profile">
+                    <Profile/>
                 </Route>
             </div>
         </Provider>
