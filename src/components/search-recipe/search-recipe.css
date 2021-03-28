@@ -1,0 +1,16 @@
+.wbdv-background-search-bar {
+    height: 80px;
+    background-color: #f5f5f5;
+}
+
+.wbdv-search-details {
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 1;
+}
+
+.wbdv-search-input {
+    max-width: 700px;
+    margin: 0 auto;
+    transform: translateY(-50%);
+}
