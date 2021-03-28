@@ -8,7 +8,7 @@ import recipePageReducer from "../reducers/recipe-page-reducer"
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import AddRecipePage from "./add-recipe-page/add-recipe-page";
-import Profile from "./profile/profile";
+import ProfilePage from "./profile/profile-page";
 
 const store = createStore(recipePageReducer)
 
@@ -19,6 +19,9 @@ const WebManager = () => {
                 <Redirect from={"/"} to={"/welcome"}/>
                 <Route path="/welcome">
                     <LandingPage/>
+                </Route>
+                <Route path="/profile">
+                    <ProfilePage/>
                 </Route>
                 <Route path="/login">
                     <LoginPage/>
@@ -33,7 +36,7 @@ const WebManager = () => {
                     <AddRecipePage/>
                 </Route>
                 <Route path="/:username/profile">
-                    <Profile/>
+                    <ProfilePage/>
                 </Route>
             </div>
         </Provider>
