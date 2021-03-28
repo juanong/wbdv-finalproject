@@ -1,21 +1,5 @@
 const initialState = {
-    recipes: [
-        {
-            'id': 123,
-            'title': "Pizza",
-        },
-        {
-            'id': 124,
-            'title': "Pizza",
-        },
-        {
-            'id': 125,
-            'title': "Pizza",
-        },
-        {
-            'id': 126,
-            'title': "Pizza",
-        }],
+    recipes: [],
     imageBaseUrl: ""
 }
 
