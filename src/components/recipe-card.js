@@ -14,7 +14,7 @@ import ShareIcon from "@material-ui/icons/Share";
 
 const useSearchStyles = makeStyles(theme => ({
         card: {
-            maxWidth: 400,
+            maxWidth: 380,
             transition: "0.3s",
             marginBottom: 25,
             margin: "auto",
