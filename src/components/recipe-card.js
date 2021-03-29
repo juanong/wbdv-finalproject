@@ -39,14 +39,14 @@ const useSearchStyles = makeStyles(theme => ({
 const RecipeCard = ({recipe, imageBaseUrl}) => {
     const styleClasses = useSearchStyles();
 
-    return (<Grid item xs={3}>
+    return (<Grid item xs={12} s={12} m={4} l={4} xl={3}>
 
             <Card className={styleClasses.card}>
                 <CardMedia className={styleClasses.cardMedia}
                            image={`${imageBaseUrl}/${recipe.image}`}/>
 
                 <CardContent className={styleClasses.cardContent}>
-                    <Typography
+                    <Typography noWrap
                         className={styleClasses.cardHeading}>
                         {recipe.title}
                     </Typography>
