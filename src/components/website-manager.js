@@ -7,8 +7,9 @@ import DummyHomePage from "./dummy-home-page";
 import recipePageReducer from "../reducers/recipe-page-reducer"
 import {createStore} from "redux";
 import {Provider} from "react-redux";
-import AddRecipePage from "./add-recipe-page/add-recipe-page";
-import Profile from "./profile/profile";
+import Profile from "./profile/profile-page";
+import SearchRecipe from "./search-recipe/search-recipe";
+import CreateRecipe from "./create-recipe-page/create-recipe";
 
 const store = createStore(recipePageReducer)
 
@@ -30,10 +31,13 @@ const WebManager = () => {
                     <DummyHomePage/>
                 </Route>
                 <Route path="/:username/add/recipe">
-                    <AddRecipePage/>
+                    <CreateRecipe/>
                 </Route>
                 <Route path="/:username/profile">
                     <Profile/>
+                </Route>
+                <Route path="/home/:username/search">
+                    <SearchRecipe/>
                 </Route>
             </div>
         </Provider>
