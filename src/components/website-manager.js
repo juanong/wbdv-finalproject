@@ -23,7 +23,7 @@ const WebManager = () => {
     return (
         <Provider store={store}>
             <div>
-                {/*<Redirect from={"/"} to={"/welcome"}/>*/}
+                <Redirect from={"/"} to={"/welcome"}/>
                 <Route path="/welcome">
                     <LandingPage/>
                 </Route>
