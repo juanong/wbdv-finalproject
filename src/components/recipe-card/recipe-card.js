@@ -44,7 +44,7 @@ const RecipeCard = ({recipe, imageBaseUrl}) => {
     return (<Grid item xs={12} s={12} m={4} l={4} xl={3}>
 
             <Card className={styleClasses.card}>
-                <Link to={`/${username}/recipes/${recipe.id}`}>
+                <Link to= {username === undefined ? `/recipes/${recipe.id}` : `/${username}/recipes/${recipe.id}`}>
                     <CardMedia className={styleClasses.cardMedia}
                                image={`${imageBaseUrl}/${recipe.image}`}/>
 
