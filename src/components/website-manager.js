@@ -5,13 +5,19 @@ import LoginPage from "./login-page/login-page";
 import RecipePage from "./recipe-page/recipe-page";
 import DummyHomePage from "./dummy-home-page";
 import recipePageReducer from "../reducers/recipe-page-reducer"
-import {createStore} from "redux";
+import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import Profile from "./profile/profile-page";
 import SearchRecipe from "./search-recipe/search-recipe";
 import CreateRecipe from "./create-recipe-page/create-recipe";
+import searchRecipeReducer from "../reducers/search-recipe-reducer";
 
-const store = createStore(recipePageReducer)
+const reducer = combineReducers({
+    recipePageReducer: recipePageReducer,
+    searchRecipeReducer: searchRecipeReducer
+})
+
+const store = createStore(reducer)
 
 const WebManager = () => {
     return (
@@ -36,7 +42,7 @@ const WebManager = () => {
                 <Route path="/:username/profile">
                     <Profile/>
                 </Route>
-                <Route path="/home/:username/search">
+                <Route path="/search">
                     <SearchRecipe/>
                 </Route>
             </div>

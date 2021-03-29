@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import searchService from '../../services/search-recipe-services'
 
 import {
@@ -32,6 +32,15 @@ const SearchRecipe = ({
         searchRecipes("")
     }, [])
 
+    const [searchQuery, setSearchQuery] = useState("")
+
+    function keyPress(event) {
+        if (event.keyCode === 13) {
+            searchRecipes(searchQuery);
+            setSearchQuery("");
+        }
+    }
+
     return <div className="wbdv-search-container">
         <div className="wbdv-search-header">
             <div className="wbdv-background-search-bar"/>
@@ -46,9 +55,16 @@ const SearchRecipe = ({
                             ),
                             className: styleClasses.wbdvSearchInputField
                         }}
+                        onChange={event => {
+                            setSearchQuery(event.target.value)
+                        }}
+                        onKeyDown={event => {
+                            keyPress(event)
+                        }}
                         id="search-recipe"
                         type="text"
-                        fullWidth="true"
+                        value={searchQuery}
+                        fullWidth={true}
                         placeholder="Search recipe"
                         variant="outlined"/>
                 </div>
