@@ -40,7 +40,7 @@ const RecipePage = (
 
 const stpm = (state) => {
     return {
-        recipe: state.recipe
+        recipe: state.recipePageReducer.recipe
     }
 }
 
