@@ -10,18 +10,10 @@ const RecipeNavBarV2 = ({username}) => {
 
     return (
         <>
-            <div className="container navbar-container">
-                <div className="row navbar-v2">
-                    <div className="col-1 separation-padding">
-                        <i onClick={showSideBar}
-                           className="fas fa-bars fa-2x"></i>
-                    </div>
-                    <div className="col-5 separation-padding">
-                        <span className="navbar-logo">Spoonful</span>
-                    </div>
-                    <div className="col-6 text-right separation-padding">
-                        <i className="fas fa-search fa-2x"></i>
-                    </div>
+            <div className="navbar-v2">
+                <div>
+                    <i onClick={showSideBar}
+                       className="fas fa-bars fa-2x"></i>
                 </div>
             </div>
             <Sidebar sidebar={sidebar} showSidebar={showSideBar} username={username}/>

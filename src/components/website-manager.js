@@ -34,7 +34,7 @@ const WebManager = () => {
                     <RecipePage/>
                 </Route>
                 <Route path="/home/:username">
-                    <DummyHomePage/>
+                    <LandingPage/>
                 </Route>
                 <Route path="/:username/add/recipe">
                     <CreateRecipe/>
