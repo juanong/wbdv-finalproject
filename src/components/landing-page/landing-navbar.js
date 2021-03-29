@@ -15,7 +15,9 @@ import {
 import Typography from "@material-ui/core/Typography";
 import RecipeNavBarV2 from "../recipe-page/recipe-navbar-v2";
 import {AccountCircle, Search} from "@material-ui/icons";
-import {Link, useParams} from "react-router-dom";
+import {Link, Redirect, useParams} from "react-router-dom";
+import SearchRecipe from "../search-recipe/search-recipe";
+import SearchBar from "../search-bar/search-bar";
 
 const useStyles = makeStyles({
     navbarDisplayFlex: {
@@ -33,22 +35,30 @@ const useStyles = makeStyles({
     },
     wbdvLandingSearchBar: {
         color: "white"
+    },
+    wbdvSearchBarNav: {
+        maxWidth: 500
+    },
+    toolbarTitle: {
+        flex: 1,
+        paddingRight: 20
     }
 });
 
 const navLinks = [
-    {title: `Home`, path: `/home`},
+    // {title: `Home`, path: `/home`},
     // { title: `Recipes`, path:`/recipies` },
     // { title: `Vegetarian & Vegan Paradise`, path: `/vegan` },
     // { title: `Blogs`, path: `/blogs` },
-    {title: `About Us`, path: `/aboutus`},
-    {title: 'Contact', path: `/contact`}
+    {title: `About Us`, path: `#`},
+    {title: 'Contact', path: `#`}
 ];
 
-export default function LandingNavbar(props) {
+export default function LandingNavbar({isSearchPage}) {
     const classes = useStyles();
 
     const {username} = useParams();
+
 
     return (
         <AppBar position="static">
@@ -79,38 +89,30 @@ export default function LandingNavbar(props) {
                             </a>
                         ))}
                     </List>
-
-                    <TextField
-                        className={classes.wbdvLandingSearchBar}
-                        variant="filled"
-                        id="input-with-icon-textfield"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Search/>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-
-                    {
-                        username === undefined &&
-                        <>
-                            <Link to={'/login'}>
-                                <button type="button" className="btn btn-success">
-                                    Log In
-                                </button>
-                            </Link>
-                            <Link to={'/signup'}>
-                                <button type="button" className="btn btn-success">
-                                    Sign Up
-                                </button>
-                            </Link>
-                        </>
-
-                    }
-
                 </Container>
+
+                <Container className={classes.wbdvSearchBarNav}>
+                    {
+                        !isSearchPage && <SearchBar/>
+                    }
+                </Container>
+                {
+                    username === undefined &&
+                    <>
+                        <Link to={'/login'}>
+                            <button type="button" className="btn btn-success">
+                                Log In
+                            </button>
+                        </Link>
+                        <Link to={'/signup'}>
+                            <button type="button" className="btn btn-success">
+                                Sign Up
+                            </button>
+                        </Link>
+                    </>
+
+                }
+
             </Toolbar>
         </AppBar>
     );

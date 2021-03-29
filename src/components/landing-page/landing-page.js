@@ -15,10 +15,10 @@ const LandingPage = ({recipes, imageBaseUrl, searchRecipes}) => {
             {/*<div>*/}
             {/*<LandingHeader/>*/}
             {/*</div>*/}
-            <div>
-                <LandingNavbar/>
-            </div>
-            <br/><br/> <br/>
+            {/*<div>*/}
+            {/*    <LandingNavbar searchRecipes={searchRecipes}/>*/}
+            {/*</div>*/}
+            {/*<br/><br/> <br/>*/}
             <div>
                 <LandingMain recipes={recipes} imageBaseUrl={imageBaseUrl}/>
             </div>

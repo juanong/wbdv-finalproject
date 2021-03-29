@@ -23,10 +23,8 @@ const RecipePage = (
     }, [recipeId])
 
     return (
+
         <div>
-            <div className="sticky-top">
-                <LandingNavbar/>
-            </div>
             <div className="container container-outline">
                 <RecipeBanner recipe={recipe}/>
                 <RecipeBody recipe={recipe}/>
