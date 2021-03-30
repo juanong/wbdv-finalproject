@@ -7,6 +7,7 @@ import RecipeNavBarV2 from "./recipe-navbar-v2";
 import RecipeBanner from "./recipe-banner";
 import RecipeBody from "./recipe-body";
 import ReviewsSection from "./reviews-section";
+import LandingNavbar from "../landing-page/landing-navbar";
 
 const RecipePage = (
     {
@@ -22,10 +23,8 @@ const RecipePage = (
     }, [recipeId])
 
     return (
+
         <div>
-            <div className="sticky-top">
-                <RecipeNavBarV2 username={username}/>
-            </div>
             <div className="container container-outline">
                 <RecipeBanner recipe={recipe}/>
                 <RecipeBody recipe={recipe}/>

@@ -12,9 +12,6 @@ const useStyles = makeStyles((theme) => ({
     toolbar: {
         borderBottom: `1px solid ${theme.palette.divider}`,
     },
-    toolbarTitle: {
-        flex: 1,
-    },
     toolbarSecondary: {
         justifyContent: 'space-between',
         overflowX: 'auto',
@@ -32,11 +29,6 @@ export default function LandingHeader(props) {
     return (
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
-
-                <IconButton style={{ flex: 1 }}>
-                    <SearchIcon />
-                </IconButton>
-
                 <Link to={'/profile'} >
                     <button type="button" className="btn btn-success">
                         Profile
@@ -44,17 +36,17 @@ export default function LandingHeader(props) {
                 </Link>
                 &nbsp; &nbsp;
 
-                    <Link to={'/login'} >
-                        <button type="button" className="btn btn-success">
-                            Log In
-                        </button>
-                    </Link>
-                &nbsp; &nbsp;
-                    <Link to={'/signup'}>
-                        <button type="button" className="btn btn-success">
-                            Sign Up
-                        </button>
-                    </Link>
+                {/*    <Link to={'/login'} >*/}
+                {/*        <button type="button" className="btn btn-success">*/}
+                {/*            Log In*/}
+                {/*        </button>*/}
+                {/*    </Link>*/}
+                {/*&nbsp; &nbsp;*/}
+                {/*    <Link to={'/signup'}>*/}
+                {/*        <button type="button" className="btn btn-success">*/}
+                {/*            Sign Up*/}
+                {/*        </button>*/}
+                {/*    </Link>*/}
             </Toolbar>
 
         </React.Fragment>

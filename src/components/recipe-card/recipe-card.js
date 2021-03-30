@@ -11,6 +11,7 @@ import {
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
+import {Link, useParams} from "react-router-dom";
 
 const useSearchStyles = makeStyles(theme => ({
         card: {
@@ -38,19 +39,22 @@ const useSearchStyles = makeStyles(theme => ({
 
 const RecipeCard = ({recipe, imageBaseUrl}) => {
     const styleClasses = useSearchStyles();
+    const {username} = useParams()
 
-    return (<Grid item xs={3}>
+    return (<Grid item xs={12} s={12} m={4} l={4} xl={3}>
 
             <Card className={styleClasses.card}>
-                <CardMedia className={styleClasses.cardMedia}
-                           image={`${imageBaseUrl}/${recipe.image}`}/>
+                <Link to= {username === undefined ? `/recipes/${recipe.id}` : `/${username}/recipes/${recipe.id}`}>
+                    <CardMedia className={styleClasses.cardMedia}
+                               image={`${imageBaseUrl}/${recipe.image}`}/>
 
-                <CardContent className={styleClasses.cardContent}>
-                    <Typography
-                        className={styleClasses.cardHeading}>
-                        {recipe.title}
-                    </Typography>
-                </CardContent>
+                    <CardContent className={styleClasses.cardContent}>
+                        <Typography noWrap
+                                    className={styleClasses.cardHeading}>
+                            {recipe.title}
+                        </Typography>
+                    </CardContent>
+                </Link>
                 <CardActions>
                     <IconButton aria-label="Account Icon"
                                 classes={{label: styleClasses.accountIconLabel}}>
