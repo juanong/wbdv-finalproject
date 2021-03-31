@@ -41,7 +41,7 @@ const RecipeCard = ({recipe, imageBaseUrl}) => {
     const styleClasses = useSearchStyles();
     const {username} = useParams()
 
-    return (<Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
+    return (<Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
 
             <Card className={styleClasses.card}>
                 <Link to= {username === undefined ? `/recipes/${recipe.id}` : `/${username}/recipes/${recipe.id}`}>
