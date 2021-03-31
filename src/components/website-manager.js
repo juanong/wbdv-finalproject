@@ -30,7 +30,7 @@ const WebManager = () => {
 
                     </Route>
                     <Route
-                        path={["/:username/profile", "/:username/profile", "/welcome", "/:username/recipes/:recipeId", "/recipes/:recipeId", "/home/:username", "/:username/add/recipe"]}
+                        path={["/:username/profile", "/profile", "/welcome", "/:username/recipes/:recipeId", "/recipes/:recipeId", "/home/:username", "/:username/add/recipe"]}
                         exact={true}
                         render={() => <LandingNavbar isSearchPage={false}/>}>
 
@@ -54,7 +54,7 @@ const WebManager = () => {
                 <Route path="/:username/add/recipe">
                     <CreateRecipe/>
                 </Route>
-                <Route path="/:username/profile">
+                <Route path="/profile">
                     <Profile/>
                 </Route>
                 <Route path={["/search", "/search/:searchQueryParam"]} exact={true}>
