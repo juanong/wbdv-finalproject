@@ -1,0 +1,117 @@
+.logo-aligned {
+    position: absolute;
+    left: 45%;
+    font-size: 1.5em;
+}
+
+.navbar-logo {
+    font-size: x-large;
+}
+
+.navbar-element-padding {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.navbar-styling {
+    background-color: #B8E2F2;
+    padding: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.navbar-v2 {
+    background-color: #3f51b5;
+    vertical-align: center;
+}
+
+.jumbo-recipe {
+    margin-top: 40px;
+    background-color: white;
+    border-bottom-color: black;
+    border-top-color: white;
+    border-left-color: white;
+    border-right-color:white;
+
+}
+
+.make-wider {
+    margin-left: -100px;
+    margin-right: -100px;
+
+}
+
+.recipe-profile-pad {
+    padding-left: 120px;
+}
+
+.banner-list-padding {
+    padding-left: 60px;
+    padding-top: 20px;
+}
+
+.icon-spacing {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.color-red {
+    color: red;
+}
+
+.separation-padding {
+    padding-top: 40px;
+}
+
+.description-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.list-spacing {
+    padding: 5px;
+}
+
+.reviews-header {
+    border-top-color: white;
+    border-left-color: white;
+    border-right-color: white;
+    border-style: solid;
+}
+
+.top-margin {
+    margin-top: 30px;
+}
+
+a {
+    color: inherit;
+}
+
+.container-outline {
+    border-style: solid;
+    border-width: thin;
+    border-color: lightgrey;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 40px;
+    padding-bottom: 150px;
+}
+
+.navbar-container {
+    padding: 0;
+    /*
+    border-style: solid;
+    border-top-color: white;
+    border-left-color: white;
+    border-right-color: white;
+    border-bottom-color: dodgerblue;
+   
+     */
+}
+
+.flex-row {
+    display: flex;
+    justify-content: center;
+}

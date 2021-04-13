@@ -1,0 +1,19 @@
+.register {
+    min-width: 550px;
+    min-height: 650px;
+    padding: 20px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    background: rgba(0, 0, 0, 0.8);
+    transform: translate(-50%, -50%);
+    color: white;
+    box-sizing: border-box;
+}
+
+.register-element {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
