@@ -5,9 +5,13 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import registrationService from '../../services/registration-page-service'
 
-const RegistrationPage = () => {
-
-    const createUser = () => {}
+const RegistrationPage = (
+    {
+        myUser = null,
+        findUser = () => {},
+        createUser = () => {}
+    }
+    ) => {
 
     const [username, setUsername] = useState("")
     const [firstName, setFirstName] = useState("")
@@ -16,8 +20,14 @@ const RegistrationPage = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [userType, setUserType] = useState("")
 
-    const validateSignUp = () => {
+    const validateUser = (username) => {
+        findUser(username)
+    }
 
+    // all fields filled and password is the same as confirm password
+    const allFieldsValid = () => {
+        return username !== "" && firstName !== "" && lastName !== ""
+            && password !== "" && password === confirmPassword
     }
 
     return (
@@ -31,6 +41,9 @@ const RegistrationPage = () => {
                        placeholder="Username"
                        className="form-control"/>
             </div>
+            {myUser !== null && myUser.length > 0 && myUser[0].username === username &&
+                <p>Oops! That username is not available</p>
+            }
             <div className="register-element">
                 <input onChange={(e) => setFirstName(e.target.value)}
                        value={firstName}
@@ -63,7 +76,6 @@ const RegistrationPage = () => {
             <div className="register-element">
                 <select onChange={(e) => {
                     setUserType(e.target.value)
-                    console.log(userType)
                 }}
                         name="Type" id="user-type"
                         value={userType}
@@ -75,10 +87,20 @@ const RegistrationPage = () => {
             <br/>
             <div className="register-element">
                 <button onClick={() => {
-                    if (password === confirmPassword) {
-                        console.log("BUTTON CLICKED")
-                    }}}
-                        className={`btn btn-block ${password !== confirmPassword ? "disabled" : ""}`}>SIGN UP</button>
+                    if (allFieldsValid()) {
+                        validateUser(username)
+                        if (myUser !== null && myUser.length === 0) {
+                            createUser(username, firstName, lastName, password, userType)
+                        }
+                    }
+                }}
+                        className={`btn btn-block ${username === "" || 
+                            firstName === "" || 
+                            lastName === "" ||
+                        password === "" || 
+                        password !== confirmPassword ? "disabled" : ""}`}>
+                    SIGN UP
+                </button>
             </div>
             <br/>
             <p className="text-center">Already have an account? <Link to='/login'>Log in here</Link></p>
@@ -86,4 +108,37 @@ const RegistrationPage = () => {
     )
 }
 
-export default RegistrationPage
+const stpm = (state) => {
+    return {
+        myUser: state.registrationPageReducer.user
+    }
+}
+
+const dtpm = (dispatch) => {
+    return {
+        findUser: (username) => {
+            registrationService.findUserByUsername(username)
+                .then(user => dispatch({
+                    type: "FIND_USER",
+                    user: user
+                }))
+        },
+
+        createUser: (username, firstName, lastName, password, userType) => {
+            registrationService.createUser(
+                {username: username,
+                    firstName: firstName,
+                    lastName: lastName,
+                    password: password,
+                    userType: userType,
+                    preferences: []
+                })
+                .then(newUser => dispatch({
+                    type: "CREATE_USER",
+                    newUser
+                }))
+        }
+    }
+}
+
+export default connect(stpm, dtpm)(RegistrationPage)

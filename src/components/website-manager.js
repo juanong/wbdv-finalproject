@@ -12,10 +12,12 @@ import CreateRecipe from "./create-recipe-page/create-recipe";
 import searchRecipeReducer from "../reducers/search-recipe-reducer";
 import LandingNavbar from "./landing-page/landing-navbar";
 import RegistrationPage from "./registration-page/registration-page";
+import registrationPageReducer from "../reducers/registration-page-reducer";
 
 const reducer = combineReducers({
     recipePageReducer: recipePageReducer,
-    searchRecipeReducer: searchRecipeReducer
+    searchRecipeReducer: searchRecipeReducer,
+    registrationPageReducer: registrationPageReducer
 })
 
 const store = createStore(reducer)
