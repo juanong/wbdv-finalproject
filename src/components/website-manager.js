@@ -43,9 +43,7 @@ const WebManager = () => {
                 <Route path="/welcome">
                     <LandingPage/>
                 </Route>
-                <Route path="/login">
-                    <LoginPage/>
-                </Route>
+                <Route path="/login" component={LoginPage}/>
                 <Route path={["/:username/recipes/:recipeId", "/recipes/:recipeId"]} exact={true}>
                     <RecipePage/>
                 </Route>

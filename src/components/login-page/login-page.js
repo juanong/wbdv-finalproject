@@ -3,24 +3,21 @@ import {Link} from 'react-router-dom'
 import './login-page.style.css'
 import loginPageService from '../../services/login-page-service'
 
-const LoginPage = () => {
+const LoginPage = ({history}) => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [serverUser, setServerUser] = useState({})
-    const [validated, setValidated] = useState(false)
+    const [serverUser, setServerUser] = useState(null)
 
     const validateUser = () => {
         // Grab the user from the server with the same username and store locally
-        loginPageService.findUserByUsername(username).then(user => setServerUser(user))
-        // Validate the user
-        const actualPassword = serverUser.password
-        if (actualPassword === password) {
-            setValidated(true)
-        } else {
-            setValidated(false)
-        }
-        alert(`Validated: ${validated}`)
+        loginPageService.findUserByUsername(username)
+            .then(user => {
+                setServerUser(user)
+                if (user !== null && user.length > 0 && user[0].password === password) {
+                    history.push(`/home/${username}`)
+                }
+            })
     }
 
     return (
@@ -37,7 +34,14 @@ const LoginPage = () => {
                        className="form-control login-element"
                        type="password"
                        value={password}
-                       placeholder="Password"/>
+                       placeholder="Password"
+                />
+                {serverUser !== null && serverUser.length === 0 &&
+                    <p>This user does not exist</p>
+                }
+                {serverUser !== null && serverUser.length > 0 && serverUser[0].password !== password &&
+                    <p>Invalid password</p>
+                }
                 <button onClick={validateUser}
                         className="btn btn-block">
                     Sign In
