@@ -1,14 +1,18 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import './login-page.style.css'
 import loginPageService from '../../services/login-page-service'
 
-const LoginPage = ({history}) => {
+const LoginPage = () => {
 
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+
+    const [credentials, setCredentials] = useState({username: "", password: ""})
     const [serverUser, setServerUser] = useState(null)
+    const [failedLogin, setFailedLogin] = useState(null)
 
+    const history = useHistory()
+
+    /*
     const validateUser = () => {
         // Grab the user from the server with the same username and store locally
         loginPageService.findUserByUsername(username)
@@ -19,6 +23,19 @@ const LoginPage = ({history}) => {
                 }
             })
     }
+     */
+
+    const login = () => {
+        loginPageService.login(credentials)
+            .then(user => {
+                if (user === 0) {
+                    setFailedLogin(true)
+                } else {
+                    setFailedLogin(false)
+                    history.push("/home")
+                }
+            })
+    }
 
     return (
         <div className="banner-bg">
@@ -26,23 +43,20 @@ const LoginPage = ({history}) => {
                 <br/>
                 <br/>
                 <h4>Login to continue</h4>
-                <input onChange={(e) => setUsername(e.target.value)}
+                <input onChange={(e) => setCredentials({...credentials, username: e.target.value})}
                        className="form-control login-element"
-                       value={username}
+                       value={credentials.username}
                        placeholder="Username"/>
-                <input onChange={(e) => setPassword(e.target.value)}
+                <input onChange={(e) => setCredentials({...credentials, password: e.target.value})}
                        className="form-control login-element"
                        type="password"
-                       value={password}
+                       value={credentials.password}
                        placeholder="Password"
                 />
-                {serverUser !== null && serverUser.length === 0 &&
-                    <p>This user does not exist</p>
+                {failedLogin &&
+                    <p>Invalid username or password</p>
                 }
-                {serverUser !== null && serverUser.length > 0 && serverUser[0].password !== password &&
-                    <p>Invalid password</p>
-                }
-                <button onClick={validateUser}
+                <button onClick={login}
                         className="btn btn-block">
                     Sign In
                 </button>

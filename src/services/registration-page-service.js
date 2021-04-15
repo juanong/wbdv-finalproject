@@ -13,10 +13,18 @@ export const createUser = (newUser) =>
         headers: {'content-type': 'application/json'}
     }).then(response => response.json())
 
+export const register = (credentials) => {
+    return fetch(USERS_URL, {
+        method: 'POST',
+        body: JSON.stringify(credentials),
+        headers: {'content-type': 'application/json'}
+    }).then(response => response.json())
+}
 
 const api = {
     findUserByUsername,
-    createUser
+    createUser,
+    register
 }
 
 export default api

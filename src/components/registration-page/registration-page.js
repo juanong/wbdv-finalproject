@@ -2,32 +2,47 @@ import './registration-page.style.css'
 import {connect} from 'react-redux'
 import '../login-page/login-page.style.css'
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import registrationService from '../../services/registration-page-service'
 
 const RegistrationPage = (
+    /*
     {
         myUser = null,
         findUser = () => {},
         createUser = () => {}
     }
+     */
     ) => {
 
-    const [username, setUsername] = useState("")
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [password, setPassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
-    const [userType, setUserType] = useState("")
+    // Use this single hook instead of having one for every single user attribute
+    const [credentials, setCredentials] = useState(
+        {username: "", firstName: "", lastName: "", password: "", userType: "HOME_COOK"}
+        )
 
-    const validateUser = (username) => {
-        findUser(username)
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [usernameTaken, setUsernameTaken] = useState(null)
+
+    const history = useHistory()
+
+    const register = () => {
+        registrationService.register(credentials)
+            .then(user => {
+                if (user === 0) {
+                    //alert("Username taken bro")
+                    setUsernameTaken(true)
+                } else {
+                    setUsernameTaken(false)
+                    history.push("/home")
+                }
+            })
     }
+
 
     // all fields filled and password is the same as confirm password
     const allFieldsValid = () => {
-        return username !== "" && firstName !== "" && lastName !== ""
-            && password !== "" && password === confirmPassword
+        return credentials.username !== "" && credentials.firstName !== "" && credentials.lastName !== ""
+            && credentials.password !== "" && credentials.password === confirmPassword
     }
 
     return (
@@ -36,30 +51,29 @@ const RegistrationPage = (
             <br/>
             <h4 className="text-center">Create Account</h4>
             <div className="register-element">
-                <input onChange={(e) => setUsername(e.target.value)}
-                       value={username}
+                <input onChange={(e) => setCredentials({...credentials, username: e.target.value})}
+                       value={credentials.username}
                        placeholder="Username"
                        className="form-control"/>
             </div>
-            {myUser !== null && myUser.length > 0 && myUser[0].username === username &&
-                <p>Oops! That username is not available</p>
-            }
+            {usernameTaken &&
+                <p>Oops! That username is not available</p>}
             <div className="register-element">
-                <input onChange={(e) => setFirstName(e.target.value)}
-                       value={firstName}
+                <input onChange={(e) => setCredentials({...credentials, firstName: e.target.value})}
+                       value={credentials.firstName}
                        placeholder="First Name"
                        className="form-control"/>
             </div>
             <div className="register-element">
-                <input onChange={(e) => setLastName(e.target.value)}
-                       value={lastName}
+                <input onChange={(e) => setCredentials({...credentials, lastName: e.target.value})}
+                       value={credentials.lastName}
                        placeholder="Last Name"
                        className="form-control"/>
             </div>
             <div className="register-element">
-                <input onChange={(e) => setPassword(e.target.value)}
+                <input onChange={(e) => setCredentials({...credentials, password: e.target.value})}
                        placeholder="Password"
-                       value={password}
+                       value={credentials.password}
                        type="password"
                        className="form-control"/>
             </div>
@@ -71,14 +85,14 @@ const RegistrationPage = (
                        className="form-control"/>
             </div>
             <div>
-                {password !== confirmPassword ? <div>Passwords don't match!!</div> : null}
+                {credentials.password !== confirmPassword ? <div>Passwords don't match</div> : null}
             </div>
             <div className="register-element">
                 <select onChange={(e) => {
-                    setUserType(e.target.value)
+                    setCredentials({...credentials, userType: e.target.value})
                 }}
                         name="Type" id="user-type"
-                        value={userType}
+                        value={credentials.userType}
                         className="form-control">
                     <option value="CHEF">Chef (Post your recipes!)</option>
                     <option value="HOME_COOK">Home Cook (Read and review recipes!)</option>
@@ -88,17 +102,14 @@ const RegistrationPage = (
             <div className="register-element">
                 <button onClick={() => {
                     if (allFieldsValid()) {
-                        validateUser(username)
-                        if (myUser !== null && myUser.length === 0) {
-                            createUser(username, firstName, lastName, password, userType)
-                        }
+                        register()
                     }
                 }}
-                        className={`btn btn-block ${username === "" || 
-                            firstName === "" || 
-                            lastName === "" ||
-                        password === "" || 
-                        password !== confirmPassword ? "disabled" : ""}`}>
+                        className={`btn btn-block ${credentials.username === "" ||
+                        credentials.firstName === "" ||
+                        credentials.lastName === "" ||
+                        credentials.password === "" ||
+                        credentials.password !== confirmPassword ? "disabled" : ""}`}>
                     SIGN UP
                 </button>
             </div>
@@ -108,6 +119,7 @@ const RegistrationPage = (
     )
 }
 
+/*
 const stpm = (state) => {
     return {
         myUser: state.registrationPageReducer.user
@@ -140,5 +152,6 @@ const dtpm = (dispatch) => {
         }
     }
 }
+ */
 
-export default connect(stpm, dtpm)(RegistrationPage)
+export default RegistrationPage
