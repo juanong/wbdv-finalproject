@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import './login-page.style.css'
-import loginPageService from '../../services/login-page-service'
+import usersService from '../../services/users-service'
 
 const LoginPage = () => {
 
@@ -26,7 +26,7 @@ const LoginPage = () => {
      */
 
     const login = () => {
-        loginPageService.login(credentials)
+        usersService.login(credentials)
             .then(user => {
                 if (user === 0) {
                     setFailedLogin(true)

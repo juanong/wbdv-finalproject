@@ -5,6 +5,8 @@ import {SidebarItems} from "./sidebar-items";
 import './sidebar.style.css'
 
 const Sidebar = ({sidebar, showSidebar, username}) => {
+
+
     return (
         <div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>

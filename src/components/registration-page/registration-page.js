@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import '../login-page/login-page.style.css'
 import React, {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
-import registrationService from '../../services/registration-page-service'
+import usersService from '../../services/users-service'
 
 const RegistrationPage = (
     /*
@@ -26,14 +26,14 @@ const RegistrationPage = (
     const history = useHistory()
 
     const register = () => {
-        registrationService.register(credentials)
+        usersService.register(credentials)
             .then(user => {
                 if (user === 0) {
                     //alert("Username taken bro")
                     setUsernameTaken(true)
                 } else {
                     setUsernameTaken(false)
-                    history.push("/home")
+                    history.push("/profile")
                 }
             })
     }

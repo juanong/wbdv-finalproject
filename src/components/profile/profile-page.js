@@ -1,8 +1,30 @@
-import React from "react";
-import {Link, useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useParams, useHistory} from "react-router-dom";
 import './profile-page.style.css';
+import usersService from '../../services/users-service'
+
+// TODO: user info should be displayed when first entering page; toggle on edit button to show input fields
+// TODO: implement updateUser function in users-service and in the node server
 
 const ProfilePage = () => {
+
+    const history = useHistory()
+
+    const [currUser, setCurrUser] = useState({})
+
+    // Get the user who is logged in
+    useEffect(() => {
+        usersService.profile()
+            .then(user => setCurrUser(user))
+    }, [])
+
+    const logout = () => {
+        usersService.logout()
+            .then((response) => {
+                console.log(response)
+                history.push("/home")
+            })
+    }
 
     const {username} = useParams();
 
@@ -16,14 +38,16 @@ const ProfilePage = () => {
                                 src="https://images.unsplash.com/photo-1614289371518-722f2615943d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
                                 alt="..." width="130" className="rounded mb-2 img-thumbnail"/><a href="#" className="btn btn-outline-dark btn-sm btn-block">Edit
                                 profile</a>
-                                <a href="#" className="btn btn-outline-dark btn-sm btn-block"> <Link to={`/${username}/add/recipe`}>
-                                    <li>
-                                        Add Recipe
-                                    </li>
-                                </Link> </a>
+                                <button className="btn btn-outline-dark btn-sm btn-block">
+                                    <Link to={`/${username}/add/recipe`}>
+                                        <li>
+                                            Add Recipe
+                                        </li>
+                                    </Link>
+                                </button>
                             </div>
                             <div className="media-body mb-5 text-white">
-                                <h4 className="mt-0 mb-0">Macanius Tiberius</h4>
+                                <h4 className="mt-0 mb-0">{`${currUser.firstName} ${currUser.lastName}`}</h4>
                                 <p className="small mb-4"><i className="fas fa-map-marker-alt mr-2"></i>Boston, MA</p>
                             </div>
                         </div>
@@ -52,14 +76,18 @@ const ProfilePage = () => {
                         <div className="p-4 rounded shadow-sm bg-light">
                             <label htmlFor="fname">First name:</label> <br/>
                             <input type="text" id="fname" name="fname"/><br/><br/>
-                                <label htmlFor="lname">Last name:</label> <br/>
-                                <input type="text" id="lname" name="lname"/><br/><br/>
-                                    <label htmlFor="email">Email:</label> <br/>
-                                    <input type="text" id="email" name="email"/><br/><br/>
-                                        <label htmlFor="password">Password:</label> <br/>
-                                        <input type="password" id="password" name="password"/><br/><br/>
-                                            <label htmlFor="lname">Mobile:</label> <br/>
-                                            <input type="tel" id="lname" name="lname"/><br/><br/>
+                            <label htmlFor="lname">Last name:</label> <br/>
+                            <input type="text" id="lname" name="lname"/><br/><br/>
+                            <label htmlFor="email">Email:</label> <br/>
+                            <input type="text" id="email" name="email"/><br/><br/>
+                            <label htmlFor="password">Password:</label> <br/>
+                            <input type="password" id="password" name="password"/><br/><br/>
+                            <label htmlFor="lname">Mobile:</label> <br/>
+                            <input type="tel" id="lname" name="lname"/><br/><br/>
+                            <button onClick={logout}
+                                    className="btn btn-outline-dark btn-sm">
+                                Logout
+                            </button>
                         </div>
                     </div>
                     <div className="py-4 px-4">
