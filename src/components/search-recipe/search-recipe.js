@@ -24,7 +24,7 @@ const SearchRecipe = ({
 
     useEffect(() => {
         searchRecipes(searchQueryParam)
-    }, [searchQueryParam])
+    }, [])
 
 
     return <div className="wbdv-search-container">
@@ -59,11 +59,38 @@ const stpm = (state) => {
 const dtpm = (dispatch) => {
     return {
         searchRecipes: (query) => {
+            const internalRecipes = [];
+
+            searchService.searchInternalRecipesByTitle(query)
+                .then(theRecipes => {
+                    const renamed = theRecipes.map(function (recipe) {
+                        return {
+                            ...recipe,
+                            id: recipe._id
+                        };
+                    });
+
+                    renamed.forEach((recipe) => {
+                        console.log(recipe)
+                        internalRecipes.push(recipe)
+                    })
+                })
+
+
             searchService.searchRecipes(query)
-                .then(theRecipes => dispatch({
-                    type: "SEARCH_RECIPES",
-                    recipes: theRecipes,
-                }))
+                .then(theRecipes => {
+                        internalRecipes.forEach((recipe) => {
+                            theRecipes.results.push(recipe)
+                        })
+                        //theRecipes.results.push(internalRecipes)
+                        console.log(theRecipes.results)
+                        //console.log(internalRecipes)
+                        dispatch({
+                            type: "SEARCH_RECIPES",
+                            recipes: theRecipes,
+                        })
+                    }
+                )
         }
     }
 }

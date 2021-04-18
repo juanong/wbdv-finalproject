@@ -43,6 +43,7 @@ const dtpm = (dispatch) => {
                 .then(theRecipes => dispatch({
                     type: "SEARCH_RECIPES",
                     recipes: theRecipes,
+                    internalrecipes: []
                 }))
         }
     }

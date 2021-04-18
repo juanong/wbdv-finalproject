@@ -13,7 +13,7 @@ const CreateRecipe = () => {
         prep_time: 0,
         cook_time: 0,
         description: "",
-        ingredients: "",
+        extendedIngredients: "",
         instructions: ""
     })
 
@@ -88,7 +88,7 @@ const CreateRecipe = () => {
             />
             <TextField
                 margin="normal"
-                id="instructions"
+                id="ingredients"
                 type="text"
                 placeholder="Ingredients"
                 fullWidth="true"
@@ -96,7 +96,21 @@ const CreateRecipe = () => {
                 multiline="true"
                 rows={4}
                 rowsMax={10}
-                onChange={(event) => setNewRecipe({...newRecipe, ingredients: event.target.value})}
+                onChange={(event) => {
+
+                    const ingredientsEntered = event.target.value
+                    const ingredientsArray = ingredientsEntered.split("\n").map((item) => {
+                        return {"originalString": item}
+                    });
+                    console.log("Newly created ingre array")
+                    console.log(ingredientsArray);
+
+                    setNewRecipe({
+                        ...newRecipe,
+                        extendedIngredients: ingredientsArray
+                    })
+
+                }}
             />
             <TextField
                 margin="normal"

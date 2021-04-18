@@ -6,7 +6,6 @@ const initialState = {
 const searchRecipeReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SEARCH_RECIPES":
-            console.log(action.recipes)
             return {
                 ...state,
                 recipes: action.recipes.results,

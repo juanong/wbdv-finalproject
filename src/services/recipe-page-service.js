@@ -1,5 +1,7 @@
 const RECIPES_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes"
 const USERS_INTERNAL_URL = "http://localhost:4000/api/internal/users"
+const RECIPE_INTERNAL_URL = "http://localhost:4000/api/internal/recipes"
+
 
 export const findRecipeById = (recipeId) =>
     fetch(`${RECIPES_URL}/${recipeId}/information`, {
@@ -17,10 +19,16 @@ export const createRecipe = (userId, newRecipe) =>
         headers: {'content-type': 'application/json'}
     }).then(status => status.json())
 
+export const findInternalRecipeById = (recipeId) =>
+    fetch(`${RECIPE_INTERNAL_URL}/${recipeId}`, {
+        method: "GET"
+    }).then(response => response.json())
+
 
 const api = {
     findRecipeById,
-    createRecipe
+    createRecipe,
+    findInternalRecipeById
 }
 
 export default api

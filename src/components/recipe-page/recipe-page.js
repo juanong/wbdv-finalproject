@@ -14,7 +14,7 @@ const RecipePage = (
         recipe = {},
         findRecipeById = () => alert("Could not find recipe")
     }
-    ) => {
+) => {
 
     const {username, recipeId} = useParams()
 
@@ -46,11 +46,22 @@ const stpm = (state) => {
 const dtpm = (dispatch) => {
     return {
         findRecipeById: (recipeId) => {
-            recipePageService.findRecipeById(recipeId)
-                .then(recipe => dispatch ({
-                    type: "FIND_RECIPE_BY_ID",
-                    recipe
-                }))
+            recipePageService.findInternalRecipeById(recipeId)
+                .then(recipe => {
+                    if (recipe === 0) {
+                        recipePageService.findRecipeById(recipeId)
+                            .then(recipe => dispatch({
+                                type: "FIND_RECIPE_BY_ID",
+                                recipe
+                            }))
+                    } else {
+                        dispatch({
+                            type: "FIND_RECIPE_BY_ID",
+                            recipe
+                        })
+                    }
+
+                })
         }
     }
 }

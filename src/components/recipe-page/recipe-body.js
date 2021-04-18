@@ -44,16 +44,19 @@ const RecipeBody = ({recipe}) => {
             </div>
             <div className="separation-padding">
                 <h4>Instructions</h4>
-                <ol>
-                    {
-                        instructions.steps !== "undefined" && typeof instructions.steps !== "undefined" &&
-                            instructions.steps.map(item =>
-                                <li className="list-spacing">
-                                    {item.step}
-                                </li>
-                            )
-                    }
-                </ol>
+                {/*<ol>*/}
+                {/*    {*/}
+                {/*        instructions.steps !== "undefined" && typeof instructions.steps !== "undefined" &&*/}
+                {/*            instructions.steps.map(item =>*/}
+                {/*                <li className="list-spacing">*/}
+                {/*                    {item.step}*/}
+                {/*                </li>*/}
+                {/*            )*/}
+                {/*    }*/}
+                {/*</ol>*/}
+                <p>
+                    {recipe.instructions}
+                </p>
             </div>
         </div>
     )
