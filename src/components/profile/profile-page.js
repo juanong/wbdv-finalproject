@@ -39,7 +39,7 @@ const ProfilePage = () => {
                                 alt="..." width="130" className="rounded mb-2 img-thumbnail"/><a href="#" className="btn btn-outline-dark btn-sm btn-block">Edit
                                 profile</a>
                                 <button className="btn btn-outline-dark btn-sm btn-block">
-                                    <Link to={`/${username}/add/recipe`}>
+                                    <Link to={`/${currUser.username}/add/recipe`}>
                                         <li>
                                             Add Recipe
                                         </li>

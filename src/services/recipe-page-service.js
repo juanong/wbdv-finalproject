@@ -1,4 +1,5 @@
 const RECIPES_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes"
+const USERS_INTERNAL_URL = "http://localhost:4000/api/internal/users"
 
 export const findRecipeById = (recipeId) =>
     fetch(`${RECIPES_URL}/${recipeId}/information`, {
@@ -9,8 +10,17 @@ export const findRecipeById = (recipeId) =>
         }
     }).then(response => response.json())
 
+export const createRecipe = (userId, newRecipe) =>
+    fetch(`${USERS_INTERNAL_URL}/${userId}/create-recipe`, {
+        method: 'POST',
+        body: JSON.stringify(newRecipe),
+        headers: {'content-type': 'application/json'}
+    }).then(status => status.json())
+
+
 const api = {
-    findRecipeById
+    findRecipeById,
+    createRecipe
 }
 
 export default api
