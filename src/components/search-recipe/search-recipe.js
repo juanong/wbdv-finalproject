@@ -24,7 +24,7 @@ const SearchRecipe = ({
 
     useEffect(() => {
         searchRecipes(searchQueryParam)
-    }, [])
+    }, [searchQueryParam])
 
 
     return <div className="wbdv-search-container">
