@@ -1,6 +1,6 @@
 import React from 'react'
 import LandingPage from "./landing-page/landing-page";
-import {Route, Redirect, Switch } from 'react-router-dom'
+import {Route, Redirect, Switch, Router} from 'react-router-dom'
 import LoginPage from "./login-page/login-page";
 import RecipePage from "./recipe-page/recipe-page";
 import recipePageReducer from "../reducers/recipe-page-reducer"
@@ -27,18 +27,18 @@ const WebManager = () => {
         <Provider store={store}>
             <div>
                 <div className="sticky-top">
-                <Switch>
-                    <Route path={["/search", "/search/:searchQueryParam"]} exact={true}
-                           render={() => <LandingNavbar isSearchPage={true}/>}>
+                    <Switch>
+                        <Route path={["/search", "/search/:searchQueryParam"]} exact={true}
+                               render={() => <LandingNavbar isSearchPage={true}/>}>
 
-                    </Route>
-                    <Route
-                        path={["/:username/profile", "/profile", "/welcome", "/:username/recipes/:recipeId", "/recipes/:recipeId", "/home/:username", "/home", "/:username/add/recipe"]}
-                        exact={true}
-                        render={() => <LandingNavbar isSearchPage={false}/>}>
+                        </Route>
+                        <Route
+                            path={["/:username/profile", "/profile", "/welcome", "/:username/recipes/:recipeId", "/recipes/:recipeId", "/home/:username", "/home", "/:username/add/recipe"]}
+                            exact={true}
+                            render={() => <LandingNavbar isSearchPage={false}/>}>
 
-                    </Route>
-                </Switch>
+                        </Route>
+                    </Switch>
                 </div>
 
                 <Redirect from={"/"} to={"/welcome"}/>
@@ -46,7 +46,8 @@ const WebManager = () => {
                     <LandingPage/>
                 </Route>
                 <Route path="/login" component={LoginPage}/>
-                <Route path={["/:username/recipes/:recipeId", "/recipes/:recipeId"]} exact={true}>
+                <Route path={["/:username/recipes/:recipeId", "/recipes/:recipeId"]}
+                       exact={true}>
                     <RecipePage/>
                 </Route>
                 <Route path={["/home/:username", "/home"]} exact={true}>

@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {Container, TextField, Button, Box} from '@material-ui/core';
 import './create-recipe.css'
 import recipeService from '../../services/recipe-page-service'
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
+
 
 const CreateRecipe = () => {
     const [newRecipe, setNewRecipe] = useState({
@@ -17,16 +18,22 @@ const CreateRecipe = () => {
         instructions: ""
     })
 
+
     const {username} = useParams()
+    const history = useHistory()
 
     const createRecipe = (username, newRecipe) => {
-        recipeService.createRecipe(username, newRecipe).then(status => {
-            if (status == -1) {
-                //display banner
-            } else {
-                console.log('recipe created successfully.')
-            }
-        })
+        recipeService.createRecipe(username, newRecipe)
+            .then(status => {
+                if (status == -1) {
+                    //display banner
+                } else {
+                    console.log('recipe created successfully.');
+                    const id = status._id;
+                    history.push(`/recipes/${id}`);
+                    //browserHistory.push(`/recipes/${id}`);
+                }
+            })
     }
 
     return <div>
@@ -127,6 +134,15 @@ const CreateRecipe = () => {
             <Box mt={2} mb={2}>
                 <Button
                     className="wbdv-create-recipe-button"
+                    disabled={
+                        newRecipe.author_id === "" ||
+                        newRecipe.title === "" ||
+                        newRecipe.servings === "" ||
+                        newRecipe.prep_time === "" ||
+                        newRecipe.cook_time === "" ||
+                        newRecipe.instructions === "" ||
+                        newRecipe.description === ""
+                    }
                     variant="contained"
                     color="primary"
                     fullWidth="true"
