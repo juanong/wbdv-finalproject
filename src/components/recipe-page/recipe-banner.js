@@ -1,8 +1,6 @@
 import React from 'react'
 
-const RecipeBanner = ({recipe}) => {
-
-    const user = recipe.user
+const RecipeBanner = ({recipe, author}) => {
 
     return (
         <div className="jumbotron rounded-0 jumbo-recipe jumbotron-fluid shadow make-wider">
@@ -12,18 +10,19 @@ const RecipeBanner = ({recipe}) => {
                         <div className="recipe-profile-pad">
                             <h1>{recipe.title}</h1>
                             {
-                                (user === "undefined" || typeof user === "undefined") &&
-                                    <div>
-                                        <i className="far fa-user fa-2x icon-spacing"></i>
-                                        <span className="icon-spacing">Anonymous Spoon</span>
-                                    </div>
+                                Object.keys(author).length === 0  &&
+                                <div>
+                                    <i className="far fa-user fa-2x icon-spacing"></i>
+                                    <span className="icon-spacing">Anonymous Spoon</span>
+                                </div>
                             }
                             {
-                                user !== "undefined" && typeof user !== "undefined" &&
-                                    <div>
-                                        <img src={recipe.user.profilepic} className="recipe-banner-profile-pic"/>
-                                        <span>{recipe.user.name}</span>
-                                    </div>
+                                Object.keys(author).length !== 0 &&
+                                <div>
+                                    <img src={author.profilePic_url}
+                                         className="recipe-banner-profile-pic"/>
+                                    <span>{`${author.firstName} ${author.lastName}`}</span>
+                                </div>
                             }
                         </div>
                     </div>

@@ -8,27 +8,33 @@ import RecipeBanner from "./recipe-banner";
 import RecipeBody from "./recipe-body";
 import ReviewsSection from "./reviews-section";
 import LandingNavbar from "../landing-page/landing-navbar";
+import userService from "../../services/users-service"
+import usersService from "../../services/users-service";
 
 const RecipePage = (
     {
         recipe = {},
-        findRecipeById = () => alert("Could not find recipe")
+        author = {},
+        findRecipeById = () => alert("Could not find recipe"),
+        findUserLoggedIn
     }
 ) => {
 
-    const {username, recipeId} = useParams()
+    const {recipeId} = useParams()
+    const [currUser, setCurrUser] = useState({})
 
     useEffect(() => {
         findRecipeById(recipeId)
+        findUserLoggedIn(setCurrUser)
     }, [recipeId])
 
     return (
 
         <div>
             <div className="container container-outline">
-                <RecipeBanner recipe={recipe}/>
+                <RecipeBanner recipe={recipe} author={author}/>
                 <RecipeBody recipe={recipe}/>
-                <ReviewsSection recipe={recipe}/>
+                <ReviewsSection recipe={recipe} currUser={currUser}/>
             </div>
             <br/>
             <br/>
@@ -39,7 +45,8 @@ const RecipePage = (
 
 const stpm = (state) => {
     return {
-        recipe: state.recipePageReducer.recipe
+        recipe: state.recipePageReducer.recipe,
+        author: state.recipePageReducer.author
     }
 }
 
@@ -59,9 +66,19 @@ const dtpm = (dispatch) => {
                             type: "FIND_RECIPE_BY_ID",
                             recipe
                         })
+
+                        userService.findUserByUsername(recipe.author_id)
+                            .then(response => dispatch({
+                                type: "FIND_AUTHOR_FOR_RECIPE",
+                                author: response
+                            }))
                     }
 
                 })
+        },
+        findUserLoggedIn: (setCurrUser) => {
+            usersService.profile()
+                .then(user => setCurrUser(user))
         }
     }
 }
