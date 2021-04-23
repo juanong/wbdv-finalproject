@@ -28,6 +28,11 @@ const WebManager = () => {
             <div>
                 <div className="sticky-top">
                     <Switch>
+                        <Route
+                            exact
+                            path="/"
+                            render={() => <Redirect to="/welcome"/>}
+                        />
                         <Route path={["/search", "/search/:searchQueryParam"]} exact={true}
                                render={() => <LandingNavbar isSearchPage={true}/>}>
 
@@ -41,7 +46,6 @@ const WebManager = () => {
                     </Switch>
                 </div>
 
-                <Redirect from={"/"} to={"/welcome"}/>
                 <Route path="/welcome">
                     <LandingPage/>
                 </Route>
