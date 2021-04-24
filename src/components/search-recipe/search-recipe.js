@@ -14,6 +14,7 @@ import RecipeCard from "../recipe-card/recipe-card";
 import {useParams} from "react-router-dom";
 import SearchBar from "../search-bar/search-bar";
 import LandingNavbar from "../landing-page/landing-navbar";
+import usersService from "../../services/users-service";
 
 const SearchRecipe = ({
                           recipes = [],
@@ -22,15 +23,18 @@ const SearchRecipe = ({
                       }) => {
 
     const {searchQueryParam} = useParams()
+    const [currUser, setCurrUser] = useState(null)
 
     useEffect(() => {
         searchRecipes(searchQueryParam)
+        usersService.profile()
+            .then(user => setCurrUser(user))
     }, [searchQueryParam])
 
 
     return (
     <div>
-        <LandingNavbar isSearchPage={true}/>
+        <LandingNavbar isSearchPage={true} userLoggedIn={currUser}/>
         <div className="wbdv-search-container">
             <div className="wbdv-search-header">
                 <div className="wbdv-background-search-bar"/>

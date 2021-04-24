@@ -46,7 +46,7 @@ const RecipeCard = ({recipe, imageBaseUrl}) => {
             <Card className={styleClasses.card}>
                 <Link to= {username === undefined ? `/recipes/${recipe.id}` : `/${username}/recipes/${recipe.id}`}>
                     <CardMedia className={styleClasses.cardMedia}
-                               image={`${imageBaseUrl}/${recipe.image}`}/>
+                               image={ recipe.api_source === 'internal' ? recipe.image : `${imageBaseUrl}/${recipe.image}`}/>
 
                     <CardContent className={styleClasses.cardContent}>
                         <Typography noWrap
