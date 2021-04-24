@@ -3,6 +3,7 @@ import {Container, TextField, Button, Box} from '@material-ui/core';
 import './create-recipe.css'
 import recipeService from '../../services/recipe-page-service'
 import {useHistory, useParams} from "react-router-dom";
+import UploadFile from "../upload-file/upload-file";
 import usersService from '../../services/users-service'
 import LandingNavbar from "../landing-page/landing-navbar";
 
@@ -10,7 +11,7 @@ const CreateRecipe = () => {
     const [newRecipe, setNewRecipe] = useState({
         author_id: "",
         title: "",
-        picture_url: "",
+        image: "",
         servings: 0,
         preparationMinutes: 0,
         cookingMinutes: 0,
@@ -19,6 +20,7 @@ const CreateRecipe = () => {
         instructions: ""
     })
 
+    const [imageUrl, setImageUrl] = useState();
 
     //const {username} = useParams()
     const history = useHistory()
@@ -143,6 +145,7 @@ const CreateRecipe = () => {
                 onChange={(event) =>
                     setNewRecipe({...newRecipe, instructions: event.target.value})}
             />
+            <UploadFile setImageUrl={setImageUrl}/>
             <Box mt={2} mb={2}>
                 <Button
                     className="wbdv-create-recipe-button"
@@ -160,6 +163,11 @@ const CreateRecipe = () => {
                     fullWidth="true"
                     size="large"
                     onClick={() => {
+                        createRecipe(currUser.username, newRecipe)
+                        console.log('Image url in create recipe', imageUrl)
+                        if (imageUrl && imageUrl !== undefined) {
+                            newRecipe.image = 'http://localhost:4000/api/internal/images/' + imageUrl;
+                        }
                         createRecipe(currUser.username, newRecipe)
                     }}
                 >
