@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Container, TextField, Button, Box} from '@material-ui/core';
 import './create-recipe.css'
 import recipeService from '../../services/recipe-page-service'
 import {useHistory, useParams} from "react-router-dom";
-
+import usersService from '../../services/users-service'
+import LandingNavbar from "../landing-page/landing-navbar";
 
 const CreateRecipe = () => {
     const [newRecipe, setNewRecipe] = useState({
@@ -19,8 +20,15 @@ const CreateRecipe = () => {
     })
 
 
-    const {username} = useParams()
+    //const {username} = useParams()
     const history = useHistory()
+
+    const [currUser, setCurrUser] = useState({})
+
+    useEffect(() => {
+        usersService.profile()
+            .then(user => setCurrUser(user))
+    }, [])
 
     const createRecipe = (username, newRecipe) => {
         recipeService.createRecipe(username, newRecipe)
@@ -39,6 +47,7 @@ const CreateRecipe = () => {
     return <div>
         {/* Recipe name, number of servings, preparation time, cooking time, Description,
          Ingredients, Instructions */}
+         <LandingNavbar isSearchPage={false} userLoggedIn={currUser}/>
         <Container fixed>
             <h1>Create Recipe</h1>
             <TextField
@@ -50,7 +59,7 @@ const CreateRecipe = () => {
                 variant="outlined"
                 onChange={(event) => setNewRecipe({
                     ...newRecipe,
-                    author_id: username,
+                    author_id: currUser.username,
                     title: event.target.value
                 })}
             />
@@ -151,7 +160,7 @@ const CreateRecipe = () => {
                     fullWidth="true"
                     size="large"
                     onClick={() => {
-                        createRecipe(username, newRecipe)
+                        createRecipe(currUser.username, newRecipe)
                     }}
                 >
                     Create recipe

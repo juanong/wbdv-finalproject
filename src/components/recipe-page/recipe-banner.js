@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const RecipeBanner = ({recipe, author}) => {
 
@@ -21,7 +22,9 @@ const RecipeBanner = ({recipe, author}) => {
                                 <div>
                                     <img src={author.profilePic_url}
                                          className="recipe-banner-profile-pic"/>
-                                    <span>{`${author.firstName} ${author.lastName}`}</span>
+                                     <Link to={`/${author.username}/profile`}>
+                                         <span>{`${author.firstName} ${author.lastName}`}</span>
+                                     </Link>
                                 </div>
                             }
                         </div>

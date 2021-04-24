@@ -55,7 +55,7 @@ const navLinks = [
     //{title: 'Contact', path: `#`}
 ];
 
-export default function LandingNavbar({isSearchPage}) {
+export default function LandingNavbar({isSearchPage, userLoggedIn}) {
     const classes = useStyles();
 
     const {username} = useParams();
@@ -64,7 +64,7 @@ export default function LandingNavbar({isSearchPage}) {
         <>
             <AppBar position="static">
                 <Toolbar>
-                    <RecipeNavBarV2/>
+                    <RecipeNavBarV2 userLoggedIn={userLoggedIn}/>
                     <Typography
                         component="h2"
                         variant="h5"
@@ -102,7 +102,7 @@ export default function LandingNavbar({isSearchPage}) {
                         }
                     </Container>
                     {
-                        username === undefined &&
+                        (!userLoggedIn || !userLoggedIn.username) &&
                         <>
                             <Link to={'/login'}>
                                 <button type="button" className="btn btn-success">

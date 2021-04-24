@@ -3,7 +3,7 @@ import Review from "./review";
 import {Link, useParams} from "react-router-dom";
 import recipePageService from '../../services/recipe-page-service'
 
-const ReviewsSection = ({recipe, currUser, recipeId, reviews}) => {
+const ReviewsSection = ({recipe, currUser, recipeId, reviews, history}) => {
 
     const [newReview, setNewReview] = useState({
         recipe_id: recipeId,
@@ -12,10 +12,14 @@ const ReviewsSection = ({recipe, currUser, recipeId, reviews}) => {
         review_body: ""
     })
 
+    const reviewValid = () => {
+        return newReview.star_rating !== 0 && newReview.review_body.length > 0
+    }
+
     return (
         <div>
             {
-                console.log(currUser.username)
+                console.log({...newReview, author: currUser})
             }
             <div className="reviews-header separation-padding">
                 <h4>Write a Review</h4>
@@ -42,10 +46,14 @@ const ReviewsSection = ({recipe, currUser, recipeId, reviews}) => {
                         </select>
                     </div>
                     <br/>
-                    <button className={`btn btn-block ${newReview.star_rating === 0 ? "disabled" : ""}`}
+                    <button className={`btn btn-block ${!reviewValid() ? "disabled" : ""}`}
                             onClick={() => {
-                                console.log(newReview)
-                                return recipePageService.createReview(newReview)
+                                if (reviewValid()) {
+                                    // Immediately reload the page to see the new review
+                                    history.go(0)
+                                    // Have to explicitly set author for some reason to avoid empty author bug
+                                    return recipePageService.createReview({...newReview, author: currUser})
+                                }
                             }}>
                         Post review</button>
                 </div>

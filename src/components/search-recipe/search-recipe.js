@@ -13,6 +13,7 @@ import {connect} from "react-redux";
 import RecipeCard from "../recipe-card/recipe-card";
 import {useParams} from "react-router-dom";
 import SearchBar from "../search-bar/search-bar";
+import LandingNavbar from "../landing-page/landing-navbar";
 
 const SearchRecipe = ({
                           recipes = [],
@@ -27,26 +28,31 @@ const SearchRecipe = ({
     }, [searchQueryParam])
 
 
-    return <div className="wbdv-search-container">
-        <div className="wbdv-search-header">
-            <div className="wbdv-background-search-bar"/>
-            <div className="wbdv-search-details">
-                <div className="wbdv-search-input">
-                    <SearchBar searchRecipes={searchRecipes} initialSearchQuery={searchQueryParam}/>
+    return (
+    <div>
+        <LandingNavbar isSearchPage={true}/>
+        <div className="wbdv-search-container">
+            <div className="wbdv-search-header">
+                <div className="wbdv-background-search-bar"/>
+                <div className="wbdv-search-details">
+                    <div className="wbdv-search-input">
+                        <SearchBar searchRecipes={searchRecipes} initialSearchQuery={searchQueryParam}/>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <Grid container>
-                {
-                    recipes.map(recipe =>
-                        <RecipeCard recipe={recipe} imageBaseUrl={imageBaseUrl}/>
-                    )
-                }
-            </Grid>
+            <div>
+                <Grid container>
+                    {
+                        recipes.map(recipe =>
+                            <RecipeCard recipe={recipe} imageBaseUrl={imageBaseUrl}/>
+                        )
+                    }
+                </Grid>
 
+            </div>
         </div>
     </div>
+    )
 }
 
 const stpm = (state) => {

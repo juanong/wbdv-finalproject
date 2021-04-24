@@ -46,6 +46,14 @@ export const profile = () =>
         credentials: "include"
     }).then(response => response.json())
 
+export const updateUser = (updatedUser) =>
+    fetch(USERS_URL, {
+        method: 'PUT',
+        credentials: 'include',
+        body: JSON.stringify(updatedUser),
+        headers: {'content-type': 'application/json'}
+    }).then(response => response.json())
+
 
 const api = {
     findUserByUsername,
@@ -53,7 +61,8 @@ const api = {
     register,
     login,
     logout,
-    profile
+    profile,
+    updateUser
 }
 
 export default api

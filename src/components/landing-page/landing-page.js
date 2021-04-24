@@ -1,30 +1,27 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import './landing-style.css'
 import LandingNavbar from "./landing-navbar"
 import LandingMain from "./landing-main"
 import searchService from "../../services/search-recipe-services";
+import usersService from '../../services/users-service'
 import {connect} from "react-redux";
 
 const LandingPage = ({recipes, imageBaseUrl, searchRecipes}) => {
+
+    const [currUser, setCurrUser] = useState(null)
+
     useEffect(() => {
         searchRecipes("")
+        usersService.profile()
+            .then(user => setCurrUser(user))
     }, [])
 
     return (
         <div>
-            {/*<div>*/}
-            {/*<LandingHeader/>*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <LandingNavbar searchRecipes={searchRecipes}/>*/}
-            {/*</div>*/}
-            {/*<br/><br/> <br/>*/}
             <div>
+                <LandingNavbar isSearchPage={false} userLoggedIn={currUser}/>
                 <LandingMain recipes={recipes} imageBaseUrl={imageBaseUrl}/>
             </div>
-            <div>
-            </div>
-
         </div>
 
     )

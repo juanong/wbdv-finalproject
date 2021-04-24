@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, useHistory} from 'react-router-dom'
 import {connect} from 'react-redux'
 import recipePageService from '../../services/recipe-page-service'
 import './recipe.style.css'
@@ -24,6 +24,7 @@ const RecipePage = (
 
     const {recipeId} = useParams()
     const [currUser, setCurrUser] = useState({})
+    const history = useHistory()
 
     useEffect(() => {
         findRecipeById(recipeId)
@@ -34,10 +35,11 @@ const RecipePage = (
     return (
 
         <div>
+            <LandingNavbar isSearchPage={false} userLoggedIn={currUser}/>
             <div className="container container-outline">
                 <RecipeBanner recipe={recipe} author={author}/>
                 <RecipeBody recipe={recipe}/>
-                <ReviewsSection recipe={recipe} currUser={currUser} recipeId={recipeId} reviews={reviews}/>
+                <ReviewsSection recipe={recipe} currUser={currUser} recipeId={recipeId} reviews={reviews} history={history}/>
             </div>
             <br/>
             <br/>

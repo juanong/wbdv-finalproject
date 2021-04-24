@@ -22,7 +22,9 @@ const reducer = combineReducers({
 
 const store = createStore(reducer)
 
+
 const WebManager = () => {
+
     return (
         <Provider store={store}>
             <div>
@@ -33,34 +35,21 @@ const WebManager = () => {
                             path="/"
                             render={() => <Redirect to="/welcome"/>}
                         />
-                        <Route path={["/search", "/search/:searchQueryParam"]} exact={true}
-                               render={() => <LandingNavbar isSearchPage={true}/>}>
-
-                        </Route>
-                        <Route
-                            path={["/:username/profile", "/profile", "/welcome", "/:username/recipes/:recipeId", "/recipes/:recipeId", "/home/:username", "/home", "/:username/add/recipe"]}
-                            exact={true}
-                            render={() => <LandingNavbar isSearchPage={false}/>}>
-
-                        </Route>
                     </Switch>
                 </div>
 
-                <Route path="/welcome">
-                    <LandingPage/>
-                </Route>
                 <Route path="/login" component={LoginPage}/>
                 <Route path={["/:username/recipes/:recipeId", "/recipes/:recipeId"]}
                        exact={true}>
                     <RecipePage/>
                 </Route>
-                <Route path={["/home/:username", "/home"]} exact={true}>
+                <Route path={["/home/:username", "/home", "/welcome"]} exact={true}>
                     <LandingPage/>
                 </Route>
-                <Route path="/:username/add/recipe">
+                <Route path="/add/recipe">
                     <CreateRecipe/>
                 </Route>
-                <Route path="/profile">
+                <Route path={["/profile", "/:username/profile"]} exact={true}>
                     <Profile/>
                 </Route>
                 <Route path={["/search", "/search/:searchQueryParam"]} exact={true}>

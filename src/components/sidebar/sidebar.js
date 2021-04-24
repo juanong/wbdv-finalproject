@@ -1,11 +1,46 @@
 import React from 'react'
 import './sidebar-items'
-import {Link} from "react-router-dom";
-import {SidebarItems} from "./sidebar-items";
+import {Link, useHistory} from "react-router-dom";
+//import {SidebarItems} from "./sidebar-items";
 import './sidebar.style.css'
+import usersService from '../../services/users-service'
 
-const Sidebar = ({sidebar, showSidebar, username}) => {
+const Sidebar = ({sidebar, showSidebar, username, userLoggedIn}) => {
 
+    const history = useHistory()
+
+    const logout = () => {
+        usersService.logout()
+            .then((response) => history.push("/"))
+    }
+
+    const goToProfile = (itemPath) => {
+        history.push(`/${userLoggedIn.username}${itemPath}`)
+        history.go(0)
+    }
+
+    const SidebarItems = [
+        {
+            pageName: 'Home',
+            path: '/home',
+            cName: 'nav-text'
+        },
+        {
+            pageName: 'Search',
+            path: '/search',
+            cName: 'nav-text'
+        },
+        {
+            pageName: 'Profile',
+            path: '/profile',
+            cName: 'nav-text'
+        },
+        {
+            pageName: 'Privacy Policy',
+            path: '/privacy',
+            cName: 'nav-text'
+        }
+    ]
 
     return (
         <div>
@@ -16,15 +51,30 @@ const Sidebar = ({sidebar, showSidebar, username}) => {
                     </li>
                     {
                         SidebarItems.map((item, index) => {
-                            return (
-                                <li key={index} className={item.cName}>
-                                    <Link to={item.path}>
-                                        {item.pageName}
-                                    </Link>
-                                </li>
-                            )
+                            if (item.pageName === 'Profile') {
+                                if (userLoggedIn && userLoggedIn.username) {
+                                    return (
+                                        <li onClick={() => goToProfile(item.path)} key={index} className={item.cName}>
+                                            <Link>
+                                                {item.pageName}
+                                            </Link>
+                                        </li>
+                                    )
+                                }
+                            }
+                            else {
+                                return (
+                                    <li key={index} className={item.cName}>
+                                        <Link to={item.path}>
+                                            {item.pageName}
+                                        </Link>
+                                    </li>
+                                )
+                            }
                         })
                     }
+                    <button className="btn btn-primary"
+                            onClick={logout}>Logout</button>
                 </ul>
             </nav>
         </div>
