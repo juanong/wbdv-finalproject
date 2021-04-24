@@ -12,7 +12,7 @@ const RecipeBody = ({recipe}) => {
 
     let summary_formatted = ""
 
-    // Grab the recipe summary, use only the first two sentences, and remove any HTML elements
+    // Grab the recipe summary and remove any HTML elements
     if (recipe.summary && typeof recipe.summary) {
         const summary = recipe.summary
         summary_formatted = summary.replace(/(<([^>]+)>)/gi, "")

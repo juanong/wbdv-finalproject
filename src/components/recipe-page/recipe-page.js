@@ -15,7 +15,9 @@ const RecipePage = (
     {
         recipe = {},
         author = {},
+        reviews = [],
         findRecipeById = () => alert("Could not find recipe"),
+        findReviewsForRecipe,
         findUserLoggedIn
     }
 ) => {
@@ -25,6 +27,7 @@ const RecipePage = (
 
     useEffect(() => {
         findRecipeById(recipeId)
+        findReviewsForRecipe(recipeId)
         findUserLoggedIn(setCurrUser)
     }, [recipeId])
 
@@ -34,7 +37,7 @@ const RecipePage = (
             <div className="container container-outline">
                 <RecipeBanner recipe={recipe} author={author}/>
                 <RecipeBody recipe={recipe}/>
-                <ReviewsSection recipe={recipe} currUser={currUser}/>
+                <ReviewsSection recipe={recipe} currUser={currUser} recipeId={recipeId} reviews={reviews}/>
             </div>
             <br/>
             <br/>
@@ -46,7 +49,8 @@ const RecipePage = (
 const stpm = (state) => {
     return {
         recipe: state.recipePageReducer.recipe,
-        author: state.recipePageReducer.author
+        author: state.recipePageReducer.author,
+        reviews: state.recipePageReducer.reviews
     }
 }
 
@@ -76,6 +80,14 @@ const dtpm = (dispatch) => {
 
                 })
         },
+        findReviewsForRecipe: (recipeId) => {
+            recipePageService.findReviewsForRecipe(recipeId)
+                .then(reviews => dispatch({
+                    type: "FIND_REVIEWS_FOR_RECIPE",
+                    reviews
+                }))
+        },
+
         findUserLoggedIn: (setCurrUser) => {
             usersService.profile()
                 .then(user => setCurrUser(user))

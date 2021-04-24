@@ -11,9 +11,9 @@ const CreateRecipe = () => {
         title: "",
         picture_url: "",
         servings: 0,
-        prep_time: 0,
-        cook_time: 0,
-        description: "",
+        preparationMinutes: 0,
+        cookingMinutes: 0,
+        summary: "",
         extendedIngredients: "",
         instructions: ""
     })
@@ -61,7 +61,8 @@ const CreateRecipe = () => {
                 placeholder="Number of servings"
                 fullWidth="true"
                 variant="outlined"
-                onChange={(event) => setNewRecipe({...newRecipe, servings: +event.target.value})}
+                onChange={(event) =>
+                    setNewRecipe({...newRecipe, servings: +event.target.value})}
             />
             <TextField
                 margin="normal"
@@ -70,7 +71,8 @@ const CreateRecipe = () => {
                 placeholder="Preparation time"
                 fullWidth="true"
                 variant="outlined"
-                onChange={(event) => setNewRecipe({...newRecipe, prep_time: +event.target.value})}
+                onChange={(event) =>
+                    setNewRecipe({...newRecipe, preparationMinutes: +event.target.value})}
             />
             <TextField
                 margin="normal"
@@ -79,19 +81,21 @@ const CreateRecipe = () => {
                 placeholder="Cooking time"
                 fullWidth="true"
                 variant="outlined"
-                onChange={(event) => setNewRecipe({...newRecipe, cook_time: +event.target.value})}
+                onChange={(event) =>
+                    setNewRecipe({...newRecipe, cookingMinutes: +event.target.value})}
             />
             <TextField
                 margin="normal"
                 id="description"
                 type="text"
-                placeholder="Description"
+                placeholder="Summary"
                 fullWidth="true"
                 variant="outlined"
                 multiline="true"
                 rows={3}
                 rowsMax={5}
-                onChange={(event) => setNewRecipe({...newRecipe, description: event.target.value})}
+                onChange={(event) =>
+                    setNewRecipe({...newRecipe, summary: event.target.value})}
             />
             <TextField
                 margin="normal"
@@ -109,8 +113,6 @@ const CreateRecipe = () => {
                     const ingredientsArray = ingredientsEntered.split("\n").map((item) => {
                         return {"originalString": item}
                     });
-                    console.log("Newly created ingre array")
-                    console.log(ingredientsArray);
 
                     setNewRecipe({
                         ...newRecipe,
@@ -129,7 +131,8 @@ const CreateRecipe = () => {
                 multiline="true"
                 rows={6}
                 rowsMax={10}
-                onChange={(event) => setNewRecipe({...newRecipe, instructions: event.target.value})}
+                onChange={(event) =>
+                    setNewRecipe({...newRecipe, instructions: event.target.value})}
             />
             <Box mt={2} mb={2}>
                 <Button
@@ -141,7 +144,7 @@ const CreateRecipe = () => {
                         newRecipe.prep_time === "" ||
                         newRecipe.cook_time === "" ||
                         newRecipe.instructions === "" ||
-                        newRecipe.description === ""
+                        newRecipe.summary === ""
                     }
                     variant="contained"
                     color="primary"

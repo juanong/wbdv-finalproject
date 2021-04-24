@@ -2,7 +2,7 @@ import React from 'react'
 
 const Review = ({review}) => {
 
-    const stars = review.stars
+    const stars = review.star_rating
 
     return (
         <div className="separation-padding review-divider">
@@ -13,10 +13,10 @@ const Review = ({review}) => {
                 {stars === 4 && <div><i className={"fas fa-star"}/><i className={"fas fa-star"}/><i className={"fas fa-star"}/><i className={"fas fa-star"}/></div>}
             </div>
             <p>
-                {review.text}
+                {review.review_body}
             </p>
             <p>
-                {review.username} | {review.date}
+                {review.author.username}
             </p>
         </div>
     )

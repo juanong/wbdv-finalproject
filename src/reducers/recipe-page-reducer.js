@@ -1,6 +1,7 @@
 const initialState = {
     recipe: {},
-    author:{}
+    author:{},
+    reviews: []
 }
 
 const recipePageReducer = (state = initialState, action) => {
@@ -15,6 +16,12 @@ const recipePageReducer = (state = initialState, action) => {
             return {
                ...state,
                author: action.author
+            }
+        case "FIND_REVIEWS_FOR_RECIPE":
+            return {
+                ...state,
+                author: {},
+                reviews: action.reviews
             }
         default:
             return state

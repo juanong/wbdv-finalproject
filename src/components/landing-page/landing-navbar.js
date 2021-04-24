@@ -51,8 +51,8 @@ const navLinks = [
     // { title: `Recipes`, path:`/recipies` },
     // { title: `Vegetarian & Vegan Paradise`, path: `/vegan` },
     // { title: `Blogs`, path: `/blogs` },
-    {title: `About Us`, path: `#`},
-    {title: 'Contact', path: `#`}
+    //{title: `About Us`, path: `#`},
+    //{title: 'Contact', path: `#`}
 ];
 
 export default function LandingNavbar({isSearchPage}) {
