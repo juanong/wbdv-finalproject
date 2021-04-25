@@ -59,15 +59,15 @@ const RecipeCard = ({recipe, imageBaseUrl}) => {
                     <IconButton aria-label="Account Icon"
                                 classes={{label: styleClasses.accountIconLabel}}>
                         <AccountCircleIcon/>
-                        <div>Anonymous</div>
+                        <div>{recipe.api_source && recipe.api_source === 'internal' ? recipe.author_id : 'Anonymous'}</div>
                     </IconButton>
 
-                    <IconButton aria-label="Add to favourites">
-                        <FavoriteIcon/>
-                    </IconButton>
-                    <IconButton aria-label="Share">
-                        <ShareIcon/>
-                    </IconButton>
+                    {/*<IconButton aria-label="Add to favourites">*/}
+                    {/*    <FavoriteIcon/>*/}
+                    {/*</IconButton>*/}
+                    {/*<IconButton aria-label="Share">*/}
+                    {/*    <ShareIcon/>*/}
+                    {/*</IconButton>*/}
                 </CardActions>
             </Card>
         </Grid>
