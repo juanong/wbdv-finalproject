@@ -33,14 +33,25 @@ export const createReview = (newReview) =>
     }).then(response => response.json())
 
 export const findReviewsForRecipe = (recipeId) =>
-    fetch(`${RECIPE_INTERNAL_URL}/${recipeId}/reviews`).then(response => response.json())
+    fetch(`${RECIPE_INTERNAL_URL}/${recipeId}/reviews`)
+        .then(response => response.json())
+
+export const findReviewsByAuthor = (username) =>
+    fetch(`${RECIPE_INTERNAL_URL}/reviews/author/${username}`)
+        .then(response => response.json())
+
+export const findRecipesByAuthor = (username) =>
+    fetch(`${USERS_INTERNAL_URL}/${username}/recipes`)
+        .then(response => response.json())
 
 const api = {
     findRecipeById,
     createRecipe,
     findInternalRecipeById,
+    findReviewsByAuthor,
     createReview,
-    findReviewsForRecipe
+    findReviewsForRecipe,
+    findRecipesByAuthor
 }
 
 export default api

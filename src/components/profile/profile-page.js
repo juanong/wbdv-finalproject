@@ -2,8 +2,10 @@ import React, {useEffect, useState} from "react";
 import {Link, useParams, useHistory} from "react-router-dom";
 import './profile-page.style.css';
 import usersService from '../../services/users-service'
+import reviewsService from '../../services/recipe-page-service'
 import LandingNavbar from "../landing-page/landing-navbar";
 import UploadFile from "../upload-file/upload-file";
+import Review from "../recipe-page/review";
 
 
 const ProfilePage = () => {
@@ -18,9 +20,12 @@ const ProfilePage = () => {
 
     const [editing, setEditing] = useState(false)
 
-    const currUserCopy = JSON.parse(JSON.stringify(currUser))
+    const [allReviews, setAllReviews] = useState([])
+
+    const [userRecipes, setUserRecipes] = useState([])
 
     const [imageUrl, setImageUrl] = useState("")
+
 
     // Get the user who is logged in
     useEffect(() => {
@@ -30,6 +35,20 @@ const ProfilePage = () => {
             })
         usersService.findUserByUsername(username)
             .then(user => setUserProfile(user))
+        // reviewsService.findReviewsByAuthor(username)
+        //     .then(reviews => {
+        //         setAllReviews(reviews)
+        //         reviews.forEach(item => {
+        //             reviewsService.findRecipeById(item.recipe_id)
+        //                 .then(recipe => setRecipeNames(recipeNames => [recipe.title, ...recipeNames]))
+        //         })
+        //     })
+        reviewsService.findReviewsByAuthor(username)
+            .then(reviews => setAllReviews(reviews))
+
+        reviewsService.findRecipesByAuthor(username)
+            .then(recipes => setUserRecipes(recipes))
+
     }, [])
 
     const logout = () => {
@@ -49,9 +68,6 @@ const ProfilePage = () => {
 
     return (
         <div>
-            {
-                console.log(currUser)
-            }
             <LandingNavbar isSearchPage={false} userLoggedIn={currUser}/>
             <div className="row py-5 px-4">
                 <div className="col-md-5 mx-auto">
@@ -67,12 +83,6 @@ const ProfilePage = () => {
                                             {
                                                 editing &&
                                                 <UploadFile setImageUrl={setImageUrl}/>
-
-                                                // <button
-                                                //     className="btn btn-outline-dark btn-sm btn-block"
-                                                //     onClick={() => setEditing(true)}>
-                                                //     Upload Profile Pic
-                                                // </button>
                                             }
                                             {
                                                 !editing &&
@@ -82,14 +92,17 @@ const ProfilePage = () => {
                                                     Edit profile
                                                 </button>
                                             }
-                                            <button
-                                                className="btn btn-outline-dark btn-sm btn-block">
-                                                <Link to={'/add/recipe'}>
-                                                    <li>
-                                                        Add Recipe
-                                                    </li>
-                                                </Link>
-                                            </button>
+                                            {
+                                                currUser.userType === 'CHEF' &&
+                                                <button
+                                                    className="btn btn-outline-dark btn-sm btn-block">
+                                                    <Link to={'/add/recipe'}>
+                                                        <li>
+                                                            Add Recipe
+                                                        </li>
+                                                    </Link>
+                                                </button>
+                                            }
                                         </>
                                     }
                                 </div>
@@ -102,20 +115,7 @@ const ProfilePage = () => {
                         <div className="bg-light p-4 d-flex justify-content-end text-center">
                             <ul className="list-inline mb-0">
                                 <li className="list-inline-item">
-
                                 </li>
-                                {/*<li className="list-inline-item">*/}
-                                {/*    <h5 className="font-weight-bold mb-0 d-block">15</h5><small className="text-muted"> <i*/}
-                                {/*    className="fas fa-image mr-1"></i>Recipes</small>*/}
-                                {/*</li>*/}
-                                {/*<li className="list-inline-item">*/}
-                                {/*    <h5 className="font-weight-bold mb-0 d-block">85</h5><small className="text-muted"> <i*/}
-                                {/*    className="fas fa-user mr-1"></i>Followers</small>*/}
-                                {/*</li>*/}
-                                {/*<li className="list-inline-item">*/}
-                                {/*    <h5 className="font-weight-bold mb-0 d-block">10</h5><small className="text-muted"> <i*/}
-                                {/*    className="fas fa-user mr-1"></i>Following</small>*/}
-                                {/*</li>*/}
                             </ul>
                         </div>
                         <div className="px-4 py-3">
@@ -151,15 +151,15 @@ const ProfilePage = () => {
                                                type="text"
                                                id="password"
                                                name="password"/><br/><br/>
-                                        <label htmlFor="userType">User type:</label> <br/>
-                                        <select onChange={e => setUserProfile({
-                                            ...userProfile,
-                                            userType: e.target.value
-                                        })}
-                                                id="userType" name="userType">
-                                            <option value="HOME_COOK">Home Cook</option>
-                                            <option value="CHEF">Chef</option>
-                                        </select>
+                                        {/*<label htmlFor="userType">User type:</label> <br/>*/}
+                                        {/*<select onChange={e => setUserProfile({*/}
+                                        {/*    ...userProfile,*/}
+                                        {/*    userType: e.target.value*/}
+                                        {/*})}*/}
+                                        {/*        id="userType" name="userType">*/}
+                                        {/*    <option value="HOME_COOK">Home Cook</option>*/}
+                                        {/*    <option value="CHEF">Chef</option>*/}
+                                        {/*</select>*/}
 
                                         <br/><br/>
                                         <p>You will have to log in again to see your changes</p>
@@ -204,26 +204,35 @@ const ProfilePage = () => {
                                 }
                             </div>
                         </div>
+                        {
+                            userProfile.userType === "CHEF" &&
+                            <div className="py-4 px-4">
+                                <h6>Recent Recipes</h6>
+                                <br/>
+                                {
+                                    userRecipes.map(recipe =>
+                                        <Link to={`/recipes/${recipe._id}`}>
+                                            <p>{recipe.title}</p>
+                                        </Link>
+                                    )
+                                }
+                            </div>
+                        }
                         <div className="py-4 px-4">
-                            <div className="d-flex align-items-center justify-content-between mb-3">
-                                <h5 className="mb-0">Recent recipes</h5><a href="#"
-                                                                           className="btn btn-link text-muted">Show
-                                all</a>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-6 mb-2 pr-lg-1"><img
-                                    src="https://images.unsplash.com/photo-1512003867696-6d5ce6835040?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-                                    alt="" className="img-fluid rounded shadow-sm"/></div>
-                                <div className="col-lg-6 mb-2 pl-lg-1"><img
-                                    src="https://images.unsplash.com/photo-1473093226795-af9932fe5856?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=985&q=80"
-                                    alt="" className="img-fluid rounded shadow-sm"/></div>
-                                <div className="col-lg-6 pr-lg-1 mb-2"><img
-                                    src="https://images.unsplash.com/photo-1559100644-59dad675d48d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDl8fHJlY2lwZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                                    alt="" className="img-fluid rounded shadow-sm"/></div>
-                                <div className="col-lg-6 pl-lg-1"><img
-                                    src="https://images.unsplash.com/photo-1575919094625-6c0fcda78000?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OTV8fHJlY2lwZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                                    alt="" className="img-fluid rounded shadow-sm"/></div>
-                            </div>
+                            <h6>Recent Reviews</h6>
+                            <br/>
+                            <ul>
+                                {
+                                    allReviews.map((item, ndx) =>
+                                        <div>
+                                            <Link to={`/recipes/${item.recipe_id}`}>
+                                                <p className='profile-review-padding'>{item.title}</p>
+                                            </Link>
+                                            <Review review={item}/>
+                                        </div>
+                                    )
+                                }
+                            </ul>
                         </div>
                     </div>
                 </div>

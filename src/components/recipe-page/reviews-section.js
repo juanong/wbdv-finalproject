@@ -7,6 +7,7 @@ const ReviewsSection = ({recipe, currUser, recipeId, reviews, history}) => {
 
     const [newReview, setNewReview] = useState({
         recipe_id: recipeId,
+        recipe_title: recipe.title,
         author: currUser,
         star_rating: 0,
         review_body: ""
@@ -18,9 +19,6 @@ const ReviewsSection = ({recipe, currUser, recipeId, reviews, history}) => {
 
     return (
         <div>
-            {
-                console.log({...newReview, author: currUser})
-            }
             <div className="reviews-header separation-padding">
                 <h4>Write a Review</h4>
             </div>
@@ -52,7 +50,7 @@ const ReviewsSection = ({recipe, currUser, recipeId, reviews, history}) => {
                                     // Immediately reload the page to see the new review
                                     history.go(0)
                                     // Have to explicitly set author for some reason to avoid empty author bug
-                                    return recipePageService.createReview({...newReview, author: currUser})
+                                    return recipePageService.createReview({...newReview, author: currUser.username})
                                 }
                             }}>
                         Post review</button>

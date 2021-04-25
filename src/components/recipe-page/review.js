@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Review = ({review}) => {
 
@@ -15,9 +16,11 @@ const Review = ({review}) => {
             <p>
                 {review.review_body}
             </p>
-            <p>
-                {review.author.username}
-            </p>
+            <Link to={`/${review.author}/profile`}>
+                <p>
+                    {review.author}
+                </p>
+            </Link>
         </div>
     )
 }

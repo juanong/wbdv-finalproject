@@ -33,7 +33,7 @@ const RegistrationPage = (
                     setUsernameTaken(true)
                 } else {
                     setUsernameTaken(false)
-                    history.push("/profile")
+                    history.push(`/${credentials.username}/profile`)
                 }
             })
     }
