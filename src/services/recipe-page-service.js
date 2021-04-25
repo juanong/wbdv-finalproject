@@ -44,6 +44,15 @@ export const findRecipesByAuthor = (username) =>
     fetch(`${USERS_INTERNAL_URL}/${username}/recipes`)
         .then(response => response.json())
 
+export const findLatestRecipes = (limit) =>
+    fetch(`${RECIPE_INTERNAL_URL}/latest?limit=${limit}`)
+        .then(response => response.json())
+
+export const findLatestRecipesForUserName = (limit, username) =>
+    fetch(`${USERS_INTERNAL_URL}/${username}/recipes/latest?limit=${limit}`)
+        .then(response => response.json())
+
+
 const api = {
     findRecipeById,
     createRecipe,
@@ -51,7 +60,8 @@ const api = {
     findReviewsByAuthor,
     createReview,
     findReviewsForRecipe,
-    findRecipesByAuthor
+    findLatestRecipes,
+    findLatestRecipesForUserName
 }
 
 export default api

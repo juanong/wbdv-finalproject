@@ -33,12 +33,44 @@ const styles = {
     }
 };
 
-const LandingMain = ({recipes, imageBaseUrl}) => {
+const LandingMain = ({recipes, imageBaseUrl, latestRecipes, user}) => {
     const classes = useStyles();
     // const { post } = props;
 
     return (
         <>
+            {
+                // Anonymous and home cook
+                ((!user || !user.username) || (user && user.userType === 'HOME_COOK')) &&
+                <>
+                    <h2> Recent recipes posted</h2>
+
+                </>
+            }
+            {
+                // Chefs
+                user && user.username && user.userType === "CHEF" &&
+                <>
+                    <h2>Your Recent recipes</h2>
+                    {
+                        latestRecipes.length === 0 &&
+                        <p>
+                            You haven't posted any recipes yet.
+                        </p>
+                    }
+                </>
+
+            }
+            <br/>
+            <Grid container>
+                {
+                    latestRecipes.map(recipe => <RecipeCard recipe={recipe}
+                                                            imageBaseUrl={imageBaseUrl}/>
+                    )
+                }
+            </Grid>
+            <h2>Other recipes you might like</h2>
+            <br/>
             <Grid container>
                 {
                     recipes.map(recipe => <RecipeCard recipe={recipe}

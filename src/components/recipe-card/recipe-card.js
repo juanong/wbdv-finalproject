@@ -1,4 +1,6 @@
 import React from "react";
+import {useHistory} from 'react-router-dom';
+
 import {
     Card,
     CardActions,
@@ -41,12 +43,21 @@ const RecipeCard = ({recipe, imageBaseUrl}) => {
     const styleClasses = useSearchStyles();
     const {username} = useParams()
 
+    const history = useHistory();
+
+    const goToProfile = (author_id) => {
+        if (author_id) {
+            history.push(`/${author_id}/profile`)
+        }
+    }
+
     return (<Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
 
             <Card className={styleClasses.card}>
-                <Link to= {username === undefined ? `/recipes/${recipe.id}` : `/${username}/recipes/${recipe.id}`}>
+                <Link
+                    to={username === undefined ? `/recipes/${recipe.id}` : `/${username}/recipes/${recipe.id}`}>
                     <CardMedia className={styleClasses.cardMedia}
-                               image={ recipe.api_source === 'internal' ? recipe.image : `${imageBaseUrl}/${recipe.image}`}/>
+                               image={recipe.api_source === 'internal' ? recipe.image : `${imageBaseUrl}/${recipe.image}`}/>
 
                     <CardContent className={styleClasses.cardContent}>
                         <Typography noWrap
@@ -57,7 +68,8 @@ const RecipeCard = ({recipe, imageBaseUrl}) => {
                 </Link>
                 <CardActions>
                     <IconButton aria-label="Account Icon"
-                                classes={{label: styleClasses.accountIconLabel}}>
+                                classes={{label: styleClasses.accountIconLabel}}
+                                onClick={() => goToProfile(recipe.author_id)}>
                         <AccountCircleIcon/>
                         <div>{recipe.api_source && recipe.api_source === 'internal' ? recipe.author_id : 'Anonymous'}</div>
                     </IconButton>
