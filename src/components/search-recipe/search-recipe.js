@@ -2,13 +2,9 @@ import React, {useEffect, useState} from "react";
 import searchService from '../../services/search-recipe-services'
 
 import {
-    Grid,
-    InputAdornment,
-    makeStyles,
-    TextField
+    Grid
 } from "@material-ui/core";
 import './search-recipe.css'
-import SearchIcon from '@material-ui/icons/Search'
 import {connect} from "react-redux";
 import RecipeCard from "../recipe-card/recipe-card";
 import {useParams} from "react-router-dom";

@@ -1,6 +1,6 @@
 import React from 'react'
 import LandingPage from "./landing-page/landing-page";
-import {Route, Redirect, Switch, Router} from 'react-router-dom'
+import {Route, Redirect, Switch} from 'react-router-dom'
 import LoginPage from "./login-page/login-page";
 import RecipePage from "./recipe-page/recipe-page";
 import recipePageReducer from "../reducers/recipe-page-reducer"
@@ -10,7 +10,6 @@ import Profile from "./profile/profile-page";
 import SearchRecipe from "./search-recipe/search-recipe";
 import CreateRecipe from "./create-recipe-page/create-recipe";
 import searchRecipeReducer from "../reducers/search-recipe-reducer";
-import LandingNavbar from "./landing-page/landing-navbar";
 import RegistrationPage from "./registration-page/registration-page";
 import registrationPageReducer from "../reducers/registration-page-reducer";
 

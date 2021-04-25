@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import axios, {post} from 'axios';
+import React from 'react';
+import {post} from 'axios';
 
 const UploadFile = ({setImageUrl}) => {
 
