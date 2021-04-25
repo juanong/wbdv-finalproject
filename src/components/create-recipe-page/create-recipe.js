@@ -163,7 +163,6 @@ const CreateRecipe = () => {
                     fullWidth="true"
                     size="large"
                     onClick={() => {
-                        createRecipe(currUser.username, newRecipe)
                         console.log('Image url in create recipe', imageUrl)
                         if (imageUrl && imageUrl !== undefined) {
                             newRecipe.image = 'http://localhost:4000/api/internal/images/' + imageUrl;
