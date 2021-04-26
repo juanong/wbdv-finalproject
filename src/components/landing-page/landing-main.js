@@ -14,6 +14,10 @@ const useStyles = makeStyles({
     cardMedia: {
         width: 160,
     },
+    headings : {
+        paddingLeft: 40,
+        marginTop: 20
+    }
 });
 
 const styles = {
@@ -32,7 +36,7 @@ const LandingMain = ({recipes, imageBaseUrl, latestRecipes, user}) => {
                 // Anonymous and home cook
                 ((!user || !user.username) || (user && user.userType === 'HOME_COOK')) &&
                 <>
-                    <h2> Recent recipes posted</h2>
+                    <h2 className={classes.headings}> Recent recipes posted</h2>
 
                 </>
             }
@@ -40,7 +44,7 @@ const LandingMain = ({recipes, imageBaseUrl, latestRecipes, user}) => {
                 // Chefs
                 user && user.username && user.userType === "CHEF" &&
                 <>
-                    <h2>Your Recent recipes</h2>
+                    <h2 className={classes.headings}>Your Recent recipes</h2>
                     {
                         latestRecipes.length === 0 &&
                         <p>
@@ -58,7 +62,7 @@ const LandingMain = ({recipes, imageBaseUrl, latestRecipes, user}) => {
                     )
                 }
             </Grid>
-            <h2>Other recipes you might like</h2>
+            <h2 className={classes.headings}>Other recipes you might like</h2>
             <br/>
             <Grid container>
                 {
