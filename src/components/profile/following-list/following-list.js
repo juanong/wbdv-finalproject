@@ -46,7 +46,7 @@ const FollowingList = () => {
     }, [])
 
     return (<div>
-        <Container>
+        <Container  className={classes.container}>
             <h2>People you are following</h2>
             {
                 (!following || following.length === 0) &&

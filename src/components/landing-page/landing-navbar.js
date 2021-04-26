@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {makeStyles} from '@material-ui/core/styles';
+import {fade, makeStyles} from '@material-ui/core/styles';
 
 import {
     AppBar,
@@ -43,6 +43,9 @@ const useStyles = makeStyles({
     toolbarTitle: {
         flex: 1,
         paddingRight: 20
+    },
+    appBar : {
+        backgroundColor: `black`
     }
 });
 
@@ -62,7 +65,7 @@ export default function LandingNavbar({isSearchPage, userLoggedIn}) {
 
     return (
         <>
-            <AppBar position="static">
+            <AppBar position="static" className={classes.appBar}>
                 <Toolbar>
                     <RecipeNavBarV2 userLoggedIn={userLoggedIn}/>
                     <Typography

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         marginTop: 20,
-        maxWidth: 800
+        maxWidth: 700
     }
 }));
 
@@ -77,8 +77,10 @@ const FollowersList = () => {
                                                         className={classes.inline}
                                                         color="textPrimary"
                                                     >
-                                                        {user.userType === "CHEF" ? "Chef"
-                                                            : "Home cook"}
+                                                        {
+                                                            user.userType === "CHEF" ? "Chef"
+                                                            : "Home cook"
+                                                        }
                                                     </Typography>
                                                 </React.Fragment>
                                             }
