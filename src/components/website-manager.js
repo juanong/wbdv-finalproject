@@ -53,12 +53,9 @@ const WebManager = () => {
                 <Route path={["/profile", "/:username/profile"]} exact={true}>
                     <Profile/>
                 </Route>
-                <Route path={["/:username/profile/followers", "/profile/followers"]} exact={true}>
-                    <FollowersList/>
+                <Route path={["/:username/profile/followers", "/profile/followers"]} exact={true} component={FollowersList}>
                 </Route>
-                <Route path={["/:username/profile/following", "/profile/following"]} exact={true}>
-                    <FollowingList/>
-                </Route>
+                <Route path={["/:username/profile/following", "/profile/following"]} exact={true} component={FollowingList}/>
                 <Route path={["/search", "/search/:searchQueryParam"]} exact={true}>
                     <SearchRecipe/>
                 </Route>

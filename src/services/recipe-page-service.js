@@ -61,7 +61,8 @@ const api = {
     createReview,
     findReviewsForRecipe,
     findLatestRecipes,
-    findLatestRecipesForUserName
+    findLatestRecipesForUserName,
+    findRecipesByAuthor
 }
 
 export default api

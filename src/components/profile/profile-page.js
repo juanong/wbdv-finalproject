@@ -66,6 +66,10 @@ const ProfilePage = () => {
             })
     }
 
+    const followUser = () => {
+        usersService.followUser(currUser.username, userProfile.username)
+    }
+
     return (
         <div>
             <LandingNavbar isSearchPage={false} userLoggedIn={currUser}/>
@@ -74,9 +78,22 @@ const ProfilePage = () => {
                     <div className="bg-white shadow rounded overflow-hidden">
                         <div className="px-4 pt-0 pb-4 cover">
                             <div className="media align-items-end profile-head">
-                                <div className="profile mr-3"><img
-                                    src={`http://localhost:4000/api/internal/images/${imageUrl}`}
-                                    alt="..." width="130" className="rounded mb-2 img-thumbnail"/>
+                                <div className="profile mr-3">
+                                    <img
+                                        src={`http://localhost:4000/api/internal/images/${imageUrl}`}
+                                        alt="..."
+                                        width="130"
+                                        className="rounded mb-2 img-thumbnail"/>
+                                    {
+                                        currUser.username && userProfile.username !== currUser.username &&
+                                        <>
+                                            <button
+                                                className="btn btn-outline-dark btn-sm btn-block"
+                                                onClick={() => followUser()}>
+                                                Follow
+                                            </button>
+                                        </>
+                                    }
                                     {
                                         userProfile.username === currUser.username &&
                                         <>
@@ -105,9 +122,12 @@ const ProfilePage = () => {
                                             }
                                         </>
                                     }
+
                                 </div>
                                 <div className="media-body mb-5 text-white">
-                                    <h4 className="mt-0 mb-0">{`${userProfile.firstName} ${userProfile.lastName}`}</h4>
+                                    <h4 className="mt-0 mb-0">
+                                        {`${userProfile.firstName} ${userProfile.lastName}`}
+                                    </h4>
                                     <br/>
                                 </div>
                             </div>
@@ -126,32 +146,35 @@ const ProfilePage = () => {
                                     </small>
                                 </li>
                                 <Link to={{
-                                    pathname : `/${userProfile.username}/profile/followers`,
+                                    pathname: `/${userProfile.username}/profile/followers`,
                                     followersUsernamesList: userProfile.followers
                                 }}>
                                     <li className="list-inline-item">
                                         <h5 className="font-weight-bold mb-0 d-block">
-                                            {userProfile.followers.length}
+                                            {userProfile.followers ? userProfile.followers.length : 0}
                                         </h5>
                                         <small
                                             className="text-muted">
-                                            <i
-                                                className="fas fa-user mr-1">
-                                            </i>
+                                            <i className="fas fa-user mr-1"/>
                                             Followers
                                         </small>
                                     </li>
                                 </Link>
-                                <li className="list-inline-item">
-                                    <h5 className="font-weight-bold mb-0 d-block">
-                                        {userProfile.following.length}
-                                    </h5>
-                                    <small
-                                        className="text-muted">
-                                        <i className="fas fa-user mr-1"/>
-                                        Following
-                                    </small>
-                                </li>
+                                <Link to={{
+                                    pathname: `/${userProfile.username}/profile/following`,
+                                    followingUsernamesList: userProfile.following
+                                }}>
+                                    <li className="list-inline-item">
+                                        <h5 className="font-weight-bold mb-0 d-block">
+                                            {userProfile.following ? userProfile.following.length : 0}
+                                        </h5>
+                                        <small
+                                            className="text-muted">
+                                            <i className="fas fa-user mr-1"/>
+                                            Following
+                                        </small>
+                                    </li>
+                                </Link>
                             </ul>
                         </div>
                         <div className="px-4 py-3">

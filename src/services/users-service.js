@@ -54,6 +54,15 @@ export const updateUser = (updatedUser) =>
         headers: {'content-type': 'application/json'}
     }).then(response => response.json())
 
+export const getFilteredUsers = (userList) =>
+    fetch(`${USERS_URL}/filter?users=${JSON.stringify(userList)}`)
+        .then(response => response.json())
+
+export const followUser = (userFollowing, userGettingFollowed) =>
+    fetch(`${USERS_URL}/${userFollowing}/follow/${userGettingFollowed}`, {
+        method: 'PUT',
+        headers: {'content-type': 'application/json'}
+    }).then(status => status.json())
 
 const api = {
     findUserByUsername,
@@ -62,7 +71,9 @@ const api = {
     login,
     logout,
     profile,
-    updateUser
+    updateUser,
+    getFilteredUsers,
+    followUser
 }
 
 export default api
