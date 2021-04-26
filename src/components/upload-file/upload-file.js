@@ -1,7 +1,7 @@
 import React from 'react';
 import {post} from 'axios';
 
-const UploadFile = ({setImageUrl}) => {
+const UploadFile = ({setImageUrl, userProfile, setUserProfile}) => {
 
     const uploadImage = (event) => {
         const image = event.target.files[0]
@@ -17,7 +17,12 @@ const UploadFile = ({setImageUrl}) => {
         post(url, formData, config)
             .then(response => {
                 if (response && response.data !== undefined) {
-                    setImageUrl(response.data.file.filename);
+                    const imageUrl = response.data.file.filename
+                    setImageUrl(imageUrl);
+                    setUserProfile({
+                        ...userProfile,
+                        profilePic_url : imageUrl
+                    })
                     console.log('Image url', response.data.file.filename)
                 }
             })

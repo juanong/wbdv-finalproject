@@ -24,8 +24,6 @@ const ProfilePage = () => {
 
     const [userRecipes, setUserRecipes] = useState([])
 
-    const [imageUrl, setImageUrl] = useState("")
-
 
     // Get the user who is logged in
     useEffect(() => {
@@ -80,7 +78,7 @@ const ProfilePage = () => {
                             <div className="media align-items-end profile-head">
                                 <div className="profile mr-3">
                                     <img
-                                        src={`http://localhost:4000/api/internal/images/${imageUrl}`}
+                                        src={`http://localhost:4000/api/internal/images/${userProfile.profilePic_url}`}
                                         alt="..."
                                         width="130"
                                         className="rounded mb-2 img-thumbnail"/>
@@ -99,7 +97,8 @@ const ProfilePage = () => {
                                         <>
                                             {
                                                 editing &&
-                                                <UploadFile setImageUrl={setImageUrl}/>
+                                                <UploadFile userProfile={userProfile}
+                                                            setUserProfile={setUserProfile}/>
                                             }
                                             {
                                                 !editing &&
