@@ -73,7 +73,7 @@ export default function LandingNavbar({isSearchPage, userLoggedIn}) {
                         noWrap
                         className={classes.toolbarTitle}
                     >
-                        <Link to={'/welcome'}>
+                        <Link to={'/home'}>
                             <span className="wbdv-navbar-logo-spacing">
                                 Spoonful
                             </span>

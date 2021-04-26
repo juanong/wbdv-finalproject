@@ -34,11 +34,6 @@ const Sidebar = ({sidebar, showSidebar, username, userLoggedIn}) => {
             pageName: 'Profile',
             path: '/profile',
             cName: 'nav-text'
-        },
-        {
-            pageName: 'Privacy Policy',
-            path: '/privacy',
-            cName: 'nav-text'
         }
     ]
 
@@ -47,22 +42,23 @@ const Sidebar = ({sidebar, showSidebar, username, userLoggedIn}) => {
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                 <ul className="nav-menu-items">
                     <li className="navbar-toggle">
-                        <i onClick={showSidebar} className="fas fa-times fa-2x" style={{color: "white"}}></i>
+                        <i onClick={showSidebar} className="fas fa-times fa-2x"
+                           style={{color: "white"}}></i>
                     </li>
                     {
                         SidebarItems.map((item, index) => {
                             if (item.pageName === 'Profile') {
                                 if (userLoggedIn && userLoggedIn.username) {
                                     return (
-                                        <li onClick={() => goToProfile(item.path)} key={index} className={item.cName}>
+                                        <li onClick={() => goToProfile(item.path)} key={index}
+                                            className={item.cName}>
                                             <Link>
                                                 {item.pageName}
                                             </Link>
                                         </li>
                                     )
                                 }
-                            }
-                            else {
+                            } else {
                                 return (
                                     <li key={index} className={item.cName}>
                                         <Link to={item.path}>
@@ -73,8 +69,11 @@ const Sidebar = ({sidebar, showSidebar, username, userLoggedIn}) => {
                             }
                         })
                     }
-                    <button className="btn btn-primary"
-                            onClick={logout}>Logout</button>
+                    {
+                        userLoggedIn && userLoggedIn.username && <button className="btn btn-primary"
+                                                         onClick={logout}>Logout</button>
+                    }
+
                 </ul>
             </nav>
         </div>

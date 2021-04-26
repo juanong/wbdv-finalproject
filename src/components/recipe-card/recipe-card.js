@@ -55,7 +55,7 @@ const RecipeCard = ({recipe, imageBaseUrl}) => {
 
             <Card className={styleClasses.card}>
                 <Link
-                    to={username === undefined ? `/recipes/${recipe.id}` : `/${username}/recipes/${recipe.id}`}>
+                    to={recipe.api_source === 'internal' ? `/recipes/${recipe._id}` :`/recipes/${recipe.id}`}>
                     <CardMedia className={styleClasses.cardMedia}
                                image={recipe.api_source === 'internal' ? recipe.image : `${imageBaseUrl}/${recipe.image}`}/>
 

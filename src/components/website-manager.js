@@ -34,7 +34,7 @@ const WebManager = () => {
                         <Route
                             exact
                             path="/"
-                            render={() => <Redirect to="/welcome"/>}
+                            render={() => <Redirect to="/home"/>}
                         />
                     </Switch>
                 </div>
@@ -44,7 +44,7 @@ const WebManager = () => {
                        exact={true}>
                     <RecipePage/>
                 </Route>
-                <Route path={["/home/:username", "/home", "/welcome"]} exact={true}>
+                <Route path={["/home/:username", "/home"]} exact={true}>
                     <LandingPage/>
                 </Route>
                 <Route path="/add/recipe">

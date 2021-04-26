@@ -24,6 +24,7 @@ const ProfilePage = () => {
 
     const [userRecipes, setUserRecipes] = useState([])
 
+    const [imageUrl, setImageUrl] = useState();
 
     // Get the user who is logged in
     useEffect(() => {
@@ -66,6 +67,7 @@ const ProfilePage = () => {
 
     const followUser = () => {
         usersService.followUser(currUser.username, userProfile.username)
+        history.go(0)
     }
 
     return (
@@ -78,12 +80,14 @@ const ProfilePage = () => {
                             <div className="media align-items-end profile-head">
                                 <div className="profile mr-3">
                                     <img
-                                        src={`http://localhost:4000/api/internal/images/${userProfile.profilePic_url}`}
+                                        src={`${userProfile.profilePic_url}`}
                                         alt="..."
                                         width="130"
                                         className="rounded mb-2 img-thumbnail"/>
                                     {
                                         currUser.username && userProfile.username !== currUser.username &&
+                                        userProfile && userProfile.followers &&
+                                        !userProfile.followers.includes(currUser.username) &&
                                         <>
                                             <button
                                                 className="btn btn-outline-dark btn-sm btn-block"
@@ -93,11 +97,24 @@ const ProfilePage = () => {
                                         </>
                                     }
                                     {
+                                        currUser.username && userProfile.username !== currUser.username &&
+                                        userProfile && userProfile.followers &&
+                                        userProfile.followers.includes(currUser.username) &&
+                                        <>
+                                            <button
+                                                className="btn btn-outline-dark btn-sm btn-block"
+                                                disabled={true}>
+                                                Following
+                                            </button>
+                                        </>
+                                    }
+                                    {
                                         userProfile.username === currUser.username &&
                                         <>
                                             {
                                                 editing &&
-                                                <UploadFile userProfile={userProfile}
+                                                <UploadFile setImageUrl={setImageUrl}
+                                                            userProfile={userProfile}
                                                             setUserProfile={setUserProfile}/>
                                             }
                                             {

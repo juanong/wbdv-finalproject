@@ -20,8 +20,8 @@ const RecipeBanner = ({recipe, author}) => {
                             {
                                 Object.keys(author).length !== 0 &&
                                 <div>
-                                    <img src={author.profilePic_url}
-                                         className="recipe-banner-profile-pic"/>
+                                    {/*<img src={author.profilePic_url}*/}
+                                    {/*     className="recipe-banner-profile-pic"/>*/}
                                      <Link to={`/${author.username}/profile`}>
                                          <span>{`${author.firstName} ${author.lastName}`}</span>
                                      </Link>
