@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
     container: {
         marginTop: 20,
         maxWidth: 700
+    },
+    avatar : {
+        backgroundSize: 'cover',
+        backgroundPosition: 'top center'
     }
 }));
 
@@ -63,7 +67,7 @@ const FollowingList = () => {
                                 <Link to={`/${user.username}/profile`}>
                                     <ListItem alignItems="flex-start">
                                         <ListItemAvatar>
-                                            <Avatar src={user.profilePic_url}/>
+                                            <Avatar size={100} className={classes.avatar}/>
                                         </ListItemAvatar>
                                         <ListItemText
                                             primary={user.firstName + " " + user.lastName}
