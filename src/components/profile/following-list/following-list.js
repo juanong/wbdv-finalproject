@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import {List} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import usersService from "../../../services/users-service";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,27 +60,29 @@ const FollowingList = () => {
                     {
                         following.map(user =>
                             <>
-                                <ListItem alignItems="flex-start">
-                                    <ListItemAvatar>
-                                        <Avatar src={user.profilePic_url}/>
-                                    </ListItemAvatar>
-                                    <ListItemText
-                                        primary={user.firstName + " " + user.lastName}
-                                        secondary={
-                                            <React.Fragment>
-                                                <Typography
-                                                    component="span"
-                                                    variant="body2"
-                                                    className={classes.inline}
-                                                    color="textPrimary"
-                                                >
-                                                    {user.userType === "CHEF" ? "Chef"
-                                                        : "Home cook"}
-                                                </Typography>
-                                            </React.Fragment>
-                                        }
-                                    />
-                                </ListItem>
+                                <Link to={`/${user.username}/profile`}>
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                            <Avatar src={user.profilePic_url}/>
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primary={user.firstName + " " + user.lastName}
+                                            secondary={
+                                                <React.Fragment>
+                                                    <Typography
+                                                        component="span"
+                                                        variant="body2"
+                                                        className={classes.inline}
+                                                        color="textPrimary"
+                                                    >
+                                                        {user.userType === "CHEF" ? "Chef"
+                                                            : "Home cook"}
+                                                    </Typography>
+                                                </React.Fragment>
+                                            }
+                                        />
+                                    </ListItem>
+                                </Link>
                                 <Divider variant="inset" component="li"/>
                             </>
                         )

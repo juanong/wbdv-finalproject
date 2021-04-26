@@ -13,7 +13,7 @@ const RecipeBanner = ({recipe, author}) => {
                             {
                                 Object.keys(author).length === 0  &&
                                 <div>
-                                    <i className="far fa-user fa-2x icon-spacing"></i>
+                                    <i className="far fa-user fa-2x icon-spacing"/>
                                     <span className="icon-spacing">Anonymous Spoon</span>
                                 </div>
                             }
