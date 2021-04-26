@@ -79,11 +79,15 @@ const ProfilePage = () => {
                         <div className="px-4 pt-0 pb-4 cover">
                             <div className="media align-items-end profile-head">
                                 <div className="profile mr-3">
-                                    <img
-                                        src={`${userProfile.profilePic_url}`}
-                                        alt="..."
-                                        width="130"
-                                        className="rounded mb-2 img-thumbnail"/>
+                                    {
+                                        userProfile && userProfile.profilePic_url &&
+                                        <img
+                                            src={`${userProfile.profilePic_url}`}
+                                            alt="..."
+                                            width="130"
+                                            className="rounded mb-2 img-thumbnail"/>
+                                    }
+
                                     {
                                         currUser.username && userProfile.username !== currUser.username &&
                                         userProfile && userProfile.followers &&

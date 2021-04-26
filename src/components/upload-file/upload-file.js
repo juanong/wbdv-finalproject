@@ -19,7 +19,7 @@ const UploadFile = ({setImageUrl, userProfile, setUserProfile}) => {
                 if (response && response.data !== undefined) {
                     const imageUrl = response.data.file.filename
                     setImageUrl(imageUrl);
-                    setUserProfile({
+                    setUserProfile && setUserProfile({
                         ...userProfile,
                         profilePic_url : "http://localhost:4000/api/internal/images/"+imageUrl
                     })
