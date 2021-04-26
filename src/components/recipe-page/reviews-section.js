@@ -18,43 +18,56 @@ const ReviewsSection = ({recipe, currUser, recipeId, reviews, history}) => {
     }
 
     return (
+
         <div>
-            <div className="reviews-header separation-padding">
-                <h4>Write a Review</h4>
-            </div>
             {
-                currUser && currUser.username &&
-                <div>
-                    <div>
-                        <textarea className="form-control top-margin"
-                                  placeholder={"Leave all your thoughts on the table"}
-                                  onChange={e => setNewReview({...newReview, review_body: e.target.value})}
-                        />
+                ((currUser && currUser.username !== recipe.author_id) || !currUser) &&
+                <>
+                    <div className="reviews-header separation-padding">
+                        <h4>Write a Review</h4>
                     </div>
-                    <br/>
-                    <p>On a scale of 1-4, how would you rate this?</p>
-                    <div>
-                        <select name="star-rating" id="stars"
-                                className="form-control"
-                                onChange={e => setNewReview({...newReview, star_rating: +e.target.value})}>
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                        </select>
-                    </div>
-                    <br/>
-                    <button className={`btn btn-block ${!reviewValid() ? "disabled" : ""}`}
-                            onClick={() => {
-                                if (reviewValid()) {
-                                    // Immediately reload the page to see the new review
-                                    history.go(0)
-                                    // Have to explicitly set author for some reason to avoid empty author bug
-                                    return recipePageService.createReview({...newReview, author: currUser.username})
-                                }
-                            }}>
-                        Post review</button>
-                </div>
+                    {
+                        currUser && currUser.username &&
+                        <div>
+                            <div>
+                <textarea className="form-control top-margin"
+                          placeholder={"Leave all your thoughts on the table"}
+                          onChange={e => setNewReview({...newReview, review_body: e.target.value})}
+                />
+                            </div>
+                            <br/>
+                            <p>On a scale of 1-4, how would you rate this?</p>
+                            <div>
+                                <select name="star-rating" id="stars"
+                                        className="form-control"
+                                        onChange={e => setNewReview({
+                                            ...newReview,
+                                            star_rating: +e.target.value
+                                        })}>
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                </select>
+                            </div>
+                            <br/>
+                            <button className={`btn btn-block ${!reviewValid() ? "disabled" : ""}`}
+                                    onClick={() => {
+                                        if (reviewValid()) {
+                                            // Immediately reload the page to see the new review
+                                            history.go(0)
+                                            // Have to explicitly set author for some reason to avoid empty author bug
+                                            return recipePageService.createReview({
+                                                ...newReview,
+                                                author: currUser.username
+                                            })
+                                        }
+                                    }}>
+                                Post review
+                            </button>
+                        </div>
+                    }
+                </>
             }
             {
                 Object.keys(currUser).length === 0 &&
@@ -69,6 +82,7 @@ const ReviewsSection = ({recipe, currUser, recipeId, reviews, history}) => {
                     <span> to leave a review</span>
                 </div>
             }
+
             <div className="reviews-header separation-padding">
                 <h4>Reviews</h4>
             </div>
@@ -85,6 +99,7 @@ const ReviewsSection = ({recipe, currUser, recipeId, reviews, history}) => {
                 }
             </div>
         </div>
+
     )
 }
 

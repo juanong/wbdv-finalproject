@@ -36,7 +36,6 @@ const RecipeBanner = ({recipe, author}) => {
                                 <li>{recipe.preparationMinutes} minutes prep time</li>
                                 <li>{recipe.cookingMinutes} minutes cooking time</li>
                             </ul>
-                            <i className="fas fa-heart color-red icon-spacing"></i><span>Save this recipe</span>
                         </div>
                     </div>
                 </div>
