@@ -132,14 +132,13 @@ const ProfilePage = () => {
                                             }
                                             {
                                                 currUser.userType === 'CHEF' &&
-                                                <button
-                                                    className="btn btn-outline-dark btn-sm btn-block">
-                                                    <Link to={'/add/recipe'}>
-                                                        <li>
-                                                            Add Recipe
-                                                        </li>
-                                                    </Link>
-                                                </button>
+                                                <Link to={'/add/recipe'}>
+                                                    <button
+                                                        className="btn btn-outline-dark btn-sm btn-block">
+                                                        Add Recipe
+                                                    </button>
+                                                </Link>
+
                                             }
                                         </>
                                     }
@@ -243,7 +242,7 @@ const ProfilePage = () => {
 
                                         <br/><br/>
                                         <p>You will have to log in again to see your changes</p>
-                                        <button className="btn btn-primary"
+                                        <button className="btn btn-primary profile-button"
                                                 onClick={() => {
                                                     setEditing(false)
                                                     updateUser()
@@ -278,7 +277,7 @@ const ProfilePage = () => {
                                 {
                                     userProfile.username === currUser.username &&
                                     <button onClick={logout}
-                                            className="btn btn-outline-dark btn-sm">
+                                            className="btn btn-outline-dark btn-sm profile-button">
                                         Logout
                                     </button>
                                 }

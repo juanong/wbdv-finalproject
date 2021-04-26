@@ -16,3 +16,8 @@ html,body {
     background-size: cover;
     background-repeat: no-repeat
 }
+
+.profile-button {
+    white-space: nowrap;
+    margin-top: 5px;
+}
