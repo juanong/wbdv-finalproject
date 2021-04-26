@@ -1,5 +1,5 @@
 const SEARCH_RECIPES_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search"
-const SEARCH_RECIPES_INTERNAL = "http://localhost:4000/api/internal/search"
+const SEARCH_RECIPES_INTERNAL = process.env.REACT_APP_INTERNAL_SEARCH_URI
 
 export const searchRecipes = (query) =>
     fetch(`${SEARCH_RECIPES_URL}?query=${query}`, {

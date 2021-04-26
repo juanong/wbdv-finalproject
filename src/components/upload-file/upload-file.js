@@ -7,7 +7,7 @@ const UploadFile = ({setImageUrl, userProfile, setUserProfile}) => {
 
     const uploadImage = (event) => {
         const image = event.target.files[0]
-        const url = 'http://localhost:4000/api/internal/upload'
+        const url = `${process.env.REACT_APP_INTERNAL_UPLOAD_URI}`
         const formData = new FormData();
         formData.append('image', image)
         const config = {
@@ -24,7 +24,7 @@ const UploadFile = ({setImageUrl, userProfile, setUserProfile}) => {
                         setImageUploaded(true)
                         setUserProfile && setUserProfile({
                             ...userProfile,
-                            profilePic_url: "http://localhost:4000/api/internal/images/" + imageUrl
+                            profilePic_url: `${process.env.REACT_APP_INTERNAL_IMAGES_URI}/` + imageUrl
                         })
                     }
                 })
@@ -34,7 +34,7 @@ const UploadFile = ({setImageUrl, userProfile, setUserProfile}) => {
     return (
         <div>
             <input
-                className={imageUploaded ? "readOnly": ""}
+                className={imageUploaded ? "readOnly" : ""}
                 title="Choose file"
                 type="file"
                 onChange={(event) => uploadImage(event)

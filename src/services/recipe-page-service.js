@@ -1,7 +1,10 @@
 const RECIPES_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes"
-const USERS_INTERNAL_URL = "http://localhost:4000/api/internal/users"
-const RECIPE_INTERNAL_URL = "http://localhost:4000/api/internal/recipes"
-const REVIEWS_URL = "http://localhost:4000/api/internal/reviews"
+// const USERS_INTERNAL_URL = "http://localhost:4000/api/internal/users"
+const USERS_INTERNAL_URL = process.env.REACT_APP_INTERNAL_USERS_URI
+// const RECIPE_INTERNAL_URL = "http://localhost:4000/api/internal/recipes"
+const RECIPE_INTERNAL_URL = process.env["REACT_APP_INTERNAL_RECIPES_URI"]
+// const REVIEWS_URL = "http://localhost:4000/api/internal/reviews"
+const REVIEWS_URL = process.env["REACT_APP_INTERNAL_REVIEWS_URI"]
 
 
 export const findRecipeById = (recipeId) =>

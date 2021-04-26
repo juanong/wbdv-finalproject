@@ -1,6 +1,6 @@
 // This service is responsible for handling all API calls related to user actions
 
-const USERS_URL = "http://localhost:4000/api/internal/users"
+const USERS_URL = process.env.REACT_APP_INTERNAL_USERS_URI
 
 export const findUserByUsername = (username) =>
     fetch(`${USERS_URL}/username/${username}`)

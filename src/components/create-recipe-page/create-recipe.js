@@ -165,7 +165,7 @@ const CreateRecipe = () => {
                     onClick={() => {
                         console.log('Image url in create recipe', imageUrl)
                         if (imageUrl && imageUrl !== undefined) {
-                            newRecipe.image = 'http://localhost:4000/api/internal/images/' + imageUrl;
+                            newRecipe.image = `${process.env.REACT_APP_INTERNAL_IMAGES_URI}/` + imageUrl;
                         }
                         createRecipe(currUser.username, newRecipe)
                     }}
