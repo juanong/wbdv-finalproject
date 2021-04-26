@@ -60,7 +60,7 @@ const LoginPage = () => {
                         className="btn btn-block">
                     Sign In
                 </button>
-                <p className="move-up">Forgot your password?</p>
+                {/*<p className="move-up">Forgot your password?</p>*/}
                 <br/>
                 <h5 className="text-center">New here? Sign up for free!</h5>
                 <Link to='/signup'>
