@@ -305,7 +305,7 @@ const ProfilePage = () => {
                                     allReviews.map((item, ndx) =>
                                         <div>
                                             <Link to={`/recipes/${item.recipe_id}`}>
-                                                <p className='profile-review-padding'>{item.title}</p>
+                                                <p>{item.recipe_title}</p>
                                             </Link>
                                             <Review review={item}/>
                                         </div>

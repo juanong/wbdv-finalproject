@@ -59,7 +59,8 @@ const ReviewsSection = ({recipe, currUser, recipeId, reviews, history}) => {
                                             // Have to explicitly set author for some reason to avoid empty author bug
                                             return recipePageService.createReview({
                                                 ...newReview,
-                                                author: currUser.username
+                                                author: currUser.username,
+                                                recipe_title : recipe.title
                                             })
                                         }
                                     }}>
