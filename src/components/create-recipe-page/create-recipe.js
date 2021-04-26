@@ -38,7 +38,6 @@ const CreateRecipe = () => {
                 if (status == -1) {
                     //display banner
                 } else {
-                    console.log('recipe created successfully.');
                     const id = status._id;
                     history.push(`/recipes/${id}`);
                     //browserHistory.push(`/recipes/${id}`);
@@ -112,7 +111,7 @@ const CreateRecipe = () => {
                 margin="normal"
                 id="ingredients"
                 type="text"
-                placeholder="Ingredients"
+                placeholder="Ingredients : Separate each ingredient with a new line"
                 fullWidth="true"
                 variant="outlined"
                 multiline="true"
@@ -163,7 +162,6 @@ const CreateRecipe = () => {
                     fullWidth="true"
                     size="large"
                     onClick={() => {
-                        console.log('Image url in create recipe', imageUrl)
                         if (imageUrl && imageUrl !== undefined) {
                             newRecipe.image = `${process.env.REACT_APP_INTERNAL_IMAGES_URI}/` + imageUrl;
                         }
