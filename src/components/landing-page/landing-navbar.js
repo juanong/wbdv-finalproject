@@ -74,27 +74,27 @@ export default function LandingNavbar({isSearchPage, userLoggedIn}) {
                         className={classes.toolbarTitle}
                     >
                         <Link to={'/home'}>
-                            <span className="wbdv-navbar-logo-spacing">
+                            <span className="wbdv-navbar-logo-spacing" >
                                 Spoonful
                             </span>
                         </Link>
                     </Typography>
-                    <Container maxWidth="md" className={classes.navbarDisplayFlex}>
+                    {/*<Container maxWidth="md" className={classes.navbarDisplayFlex}>*/}
 
-                        <List
-                            component="nav"
-                            aria-labelledby="main navigation"
-                            className={classes.navDisplayFlex}
-                        >
-                            {navLinks.map(({title, path}) => (
-                                <a href={path} key={title} className={classes.linkText}>
-                                    <ListItem button>
-                                        <ListItemText primary={title}/>
-                                    </ListItem>
-                                </a>
-                            ))}
-                        </List>
-                    </Container>
+                    {/*    <List*/}
+                    {/*        component="nav"*/}
+                    {/*        aria-labelledby="main navigation"*/}
+                    {/*        className={classes.navDisplayFlex}*/}
+                    {/*    >*/}
+                    {/*        {navLinks.map(({title, path}) => (*/}
+                    {/*            <a href={path} key={title} className={classes.linkText}>*/}
+                    {/*                <ListItem button>*/}
+                    {/*                    <ListItemText primary={title}/>*/}
+                    {/*                </ListItem>*/}
+                    {/*            </a>*/}
+                    {/*        ))}*/}
+                    {/*    </List>*/}
+                    {/*</Container>*/}
 
                     <Container className={classes.wbdvSearchBarNav}>
                         {

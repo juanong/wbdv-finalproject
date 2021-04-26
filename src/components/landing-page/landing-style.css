@@ -1,4 +1,5 @@
 .wbdv-navbar-logo-spacing {
     padding-left: 20px;
     color: white;
+    white-space: nowrap;
 }
