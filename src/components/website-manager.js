@@ -12,6 +12,8 @@ import CreateRecipe from "./create-recipe-page/create-recipe";
 import searchRecipeReducer from "../reducers/search-recipe-reducer";
 import RegistrationPage from "./registration-page/registration-page";
 import registrationPageReducer from "../reducers/registration-page-reducer";
+import FollowersList from "./profile/followers-list/followers-list";
+import FollowingList from "./profile/following-list/following-list";
 
 const reducer = combineReducers({
     recipePageReducer: recipePageReducer,
@@ -50,6 +52,12 @@ const WebManager = () => {
                 </Route>
                 <Route path={["/profile", "/:username/profile"]} exact={true}>
                     <Profile/>
+                </Route>
+                <Route path={["/:username/profile/followers", "/profile/followers"]} exact={true}>
+                    <FollowersList/>
+                </Route>
+                <Route path={["/:username/profile/following", "/profile/following"]} exact={true}>
+                    <FollowingList/>
                 </Route>
                 <Route path={["/search", "/search/:searchQueryParam"]} exact={true}>
                     <SearchRecipe/>

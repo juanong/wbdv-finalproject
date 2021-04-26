@@ -116,6 +116,42 @@ const ProfilePage = () => {
                             <ul className="list-inline mb-0">
                                 <li className="list-inline-item">
                                 </li>
+                                <li className="list-inline-item">
+                                    <h5 className="font-weight-bold mb-0 d-block">
+                                        {userProfile.recipes ? userProfile.recipes.length : 0}
+                                    </h5>
+                                    <small className="text-muted">
+                                        <i className="fas fa-image mr-1"/>
+                                        Recipes
+                                    </small>
+                                </li>
+                                <Link to={{
+                                    pathname : `/${userProfile.username}/profile/followers`,
+                                    followersUsernamesList: userProfile.followers
+                                }}>
+                                    <li className="list-inline-item">
+                                        <h5 className="font-weight-bold mb-0 d-block">
+                                            {userProfile.followers.length}
+                                        </h5>
+                                        <small
+                                            className="text-muted">
+                                            <i
+                                                className="fas fa-user mr-1">
+                                            </i>
+                                            Followers
+                                        </small>
+                                    </li>
+                                </Link>
+                                <li className="list-inline-item">
+                                    <h5 className="font-weight-bold mb-0 d-block">
+                                        {userProfile.following.length}
+                                    </h5>
+                                    <small
+                                        className="text-muted">
+                                        <i className="fas fa-user mr-1"/>
+                                        Following
+                                    </small>
+                                </li>
                             </ul>
                         </div>
                         <div className="px-4 py-3">
