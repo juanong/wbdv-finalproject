@@ -46,7 +46,7 @@
 }
 
 .banner-list-padding {
-    padding-left: 60px;
+    padding-left: 100px;
     padding-top: 20px;
 }
 
@@ -68,7 +68,8 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
-    max-width: 800px;
+    max-width: 100%;
+    height: auto;
     max-height: 600px;
 }
 

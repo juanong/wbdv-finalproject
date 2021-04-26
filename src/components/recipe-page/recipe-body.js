@@ -22,7 +22,9 @@ const RecipeBody = ({recipe}) => {
         <div>
             <div className="row flex-row">
                 <div className="separation-padding">
-                    <img className="description-image" src={recipe.image} alt="img-fluid"/>
+                    <img className="description-image"
+                         src={recipe.image}
+                         alt="img-fluid"/>
                 </div>
             </div>
             <div>

@@ -7,7 +7,7 @@ const RecipeBanner = ({recipe, author}) => {
         <div className="jumbotron rounded-0 jumbo-recipe jumbotron-fluid shadow make-wider">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-7">
+                    <div className="col-md-7">
                         <div className="recipe-profile-pad">
                             <h1>{recipe.title}</h1>
                             {
@@ -29,7 +29,7 @@ const RecipeBanner = ({recipe, author}) => {
                             }
                         </div>
                     </div>
-                    <div className="col-5">
+                    <div className="col-md-5">
                         <div className="banner-list-padding">
                             <ul>
                                 <li>{recipe.servings} servings</li>
