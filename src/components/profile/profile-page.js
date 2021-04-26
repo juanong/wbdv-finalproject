@@ -75,89 +75,91 @@ const ProfilePage = () => {
         <div>
             <LandingNavbar isSearchPage={false} userLoggedIn={currUser}/>
             <div className="row py-5 px-4">
-                <div className="col-md-5 mx-auto">
+                <div className="col-lg-7 col-md-9 col-sm-12 mx-auto">
                     <div className="bg-white shadow rounded overflow-hidden">
                         <div className="px-4 pt-0 pb-4 cover">
                             <div className="media align-items-end profile-head">
-                                <div className="profile mr-3">
-                                    {
-                                        userProfile && userProfile.profilePic_url &&
-                                        <img
-                                            src={`${userProfile.profilePic_url}`}
-                                            alt="..."
-                                            width="130"
-                                            className="rounded mb-2 img-thumbnail"/>
-                                    }
+                                <div className="row">
+                                    <div className="profile">
+                                        {
+                                            userProfile && userProfile.profilePic_url &&
+                                            <img
+                                                src={`${userProfile.profilePic_url}`}
+                                                alt="..."
+                                                width="130"
+                                                className="rounded mb-2 img-thumbnail"/>
+                                        }
 
-                                    {
-                                        currUser.username && userProfile.username !== currUser.username &&
-                                        userProfile && userProfile.followers &&
-                                        !userProfile.followers.includes(currUser.username) &&
-                                        <>
-                                            <button
-                                                className="btn btn-outline-dark btn-sm btn-block"
-                                                onClick={() => followUser()}>
-                                                Follow
-                                            </button>
-                                        </>
-                                    }
-                                    {
-                                        currUser.username && userProfile.username !== currUser.username &&
-                                        userProfile && userProfile.followers &&
-                                        userProfile.followers.includes(currUser.username) &&
-                                        <>
-                                            <button
-                                                className="btn btn-outline-dark btn-sm btn-block"
-                                                disabled={true}>
-                                                Following
-                                            </button>
-                                        </>
-                                    }
-                                    {
-                                        userProfile.username === currUser.username &&
-                                        <>
-                                            {
-                                                editing &&
-                                                <UploadFile setImageUrl={setImageUrl}
-                                                            userProfile={userProfile}
-                                                            setUserProfile={setUserProfile}/>
-                                            }
-                                            {
-                                                !editing &&
+                                        {
+                                            currUser.username && userProfile.username !== currUser.username &&
+                                            userProfile && userProfile.followers &&
+                                            !userProfile.followers.includes(currUser.username) &&
+                                            <>
                                                 <button
                                                     className="btn btn-outline-dark btn-sm btn-block"
-                                                    onClick={() => setEditing(true)}>
-                                                    Edit profile
+                                                    onClick={() => followUser()}>
+                                                    Follow
                                                 </button>
-                                            }
-                                            {
-                                                currUser.userType === 'CHEF' &&
-                                                <Link to={'/add/recipe'}>
+                                            </>
+                                        }
+                                        {
+                                            currUser.username && userProfile.username !== currUser.username &&
+                                            userProfile && userProfile.followers &&
+                                            userProfile.followers.includes(currUser.username) &&
+                                            <>
+                                                <button
+                                                    className="btn btn-outline-dark btn-sm btn-block"
+                                                    disabled={true}>
+                                                    Following
+                                                </button>
+                                            </>
+                                        }
+                                        {
+                                            userProfile.username === currUser.username &&
+                                            <>
+                                                {
+                                                    editing &&
+                                                    <UploadFile setImageUrl={setImageUrl}
+                                                                userProfile={userProfile}
+                                                                setUserProfile={setUserProfile}/>
+                                                }
+                                                {
+                                                    !editing &&
                                                     <button
-                                                        className="btn btn-outline-dark btn-sm btn-block">
-                                                        Add Recipe
+                                                        className="btn btn-outline-dark btn-sm btn-block profile-button"
+                                                        onClick={() => setEditing(true)}>
+                                                        Edit profile
                                                     </button>
-                                                </Link>
+                                                }
+                                                {
+                                                    currUser.userType === 'CHEF' &&
+                                                    <Link to={'/add/recipe'}>
+                                                        <button
+                                                            className="btn btn-outline-dark btn-sm btn-block profile-button">
+                                                            Add Recipe
+                                                        </button>
+                                                    </Link>
 
-                                            }
-                                        </>
-                                    }
+                                                }
+                                            </>
+                                        }
 
-                                </div>
-                                <div className="media-body mb-5 text-white">
-                                    <h4 className="mt-0 mb-0">
-                                        {`${userProfile.firstName} ${userProfile.lastName}`}
-                                    </h4>
-                                    <br/>
+                                    </div>
+                                    <div className="media-body mb-5 text-white">
+                                        <h4 className="mt-0 mb-0">
+                                            {`${userProfile.firstName} ${userProfile.lastName}`}
+                                        </h4>
+                                        <br/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-light p-4 d-flex justify-content-end text-center">
-                            <ul className="list-inline mb-0">
+                        <div className="bg-light p-4 pt-20">
+                            <ul className="list-inline profile-followers-list">
                                 <li className="list-inline-item">
                                 </li>
-                                <li className="list-inline-item">
-                                    <h5 className="font-weight-bold mb-0 d-block">
+                                <li className="list-inline-item profile-followers-sublist">
+                                    <h5 className="font-weight-bold mb-0 d-block text-center">
                                         {userProfile.recipes ? userProfile.recipes.length : 0}
                                     </h5>
                                     <small className="text-muted">
@@ -169,8 +171,8 @@ const ProfilePage = () => {
                                     pathname: `/${userProfile.username}/profile/followers`,
                                     followersUsernamesList: userProfile.followers
                                 }}>
-                                    <li className="list-inline-item">
-                                        <h5 className="font-weight-bold mb-0 d-block">
+                                    <li className="list-inline-item profile-followers-sublist">
+                                        <h5 className="font-weight-bold mb-0 d-block text-center">
                                             {userProfile.followers ? userProfile.followers.length : 0}
                                         </h5>
                                         <small
@@ -184,8 +186,8 @@ const ProfilePage = () => {
                                     pathname: `/${userProfile.username}/profile/following`,
                                     followingUsernamesList: userProfile.following
                                 }}>
-                                    <li className="list-inline-item">
-                                        <h5 className="font-weight-bold mb-0 d-block">
+                                    <li className="list-inline-item profile-followers-sublist">
+                                        <h5 className="font-weight-bold mb-0 d-block text-center">
                                             {userProfile.following ? userProfile.following.length : 0}
                                         </h5>
                                         <small
@@ -249,6 +251,7 @@ const ProfilePage = () => {
                                                 }}>
                                             Save changes
                                         </button>
+                                        <br/>
                                         <br/>
                                         <p onClick={() => setEditing(false)}>Cancel</p>
                                         <br/>

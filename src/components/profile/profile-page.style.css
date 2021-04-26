@@ -21,3 +21,11 @@ html,body {
     white-space: nowrap;
     margin-top: 5px;
 }
+
+.profile-followers-list {
+    margin-top: 60px;
+}
+
+.profile-followers-sublist {
+    padding-left: 8px;
+}
