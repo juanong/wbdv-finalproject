@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {post} from 'axios';
 
 const UploadFile = ({setImageUrl, userProfile, setUserProfile}) => {
+
+    const [imageUploaded, setImageUploaded] = useState(false)
 
     const uploadImage = (event) => {
         const image = event.target.files[0]
@@ -13,27 +15,30 @@ const UploadFile = ({setImageUrl, userProfile, setUserProfile}) => {
                 'content-type': 'multipart/form-data'
             }
         }
-        console.log('changing')
-        post(url, formData, config)
-            .then(response => {
-                if (response && response.data !== undefined) {
-                    const imageUrl = response.data.file.filename
-                    setImageUrl(imageUrl);
-                    setUserProfile && setUserProfile({
-                        ...userProfile,
-                        profilePic_url : "http://localhost:4000/api/internal/images/"+imageUrl
-                    })
-                    console.log('Image url', response.data.file.filename)
-                }
-            })
+        if (image !== "undefined" && typeof image !== "undefined") {
+            post(url, formData, config)
+                .then(response => {
+                    if (response && response.data !== undefined) {
+                        const imageUrl = response.data.file.filename
+                        setImageUrl(imageUrl);
+                        setImageUploaded(true)
+                        setUserProfile && setUserProfile({
+                            ...userProfile,
+                            profilePic_url: "http://localhost:4000/api/internal/images/" + imageUrl
+                        })
+                    }
+                })
+        }
     }
 
     return (
         <div>
             <input
+                className={imageUploaded ? "readOnly": ""}
                 title="Choose file"
                 type="file"
-                onChange={(event) => uploadImage(event)}
+                onChange={(event) => uploadImage(event)
+                }
             />
         </div>
     )
