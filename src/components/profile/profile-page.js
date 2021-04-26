@@ -60,14 +60,15 @@ const ProfilePage = () => {
     const updateUser = () => {
         usersService.updateUser(userProfile)
             .then(updatedUser => {
-                history.push("/login")
                 setCurrUser(updatedUser)
+                history.push("/login")
             })
     }
 
     const followUser = () => {
         usersService.followUser(currUser.username, userProfile.username)
-        history.go(0)
+            .then(status => history.go(0))
+
     }
 
     return (
