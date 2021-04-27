@@ -51,11 +51,11 @@ const FollowingList = () => {
 
     return (<div>
         <Container  className={classes.container}>
-            <h2>People you are following</h2>
+            <h2>People {username} is following : </h2>
             {
                 (!following || following.length === 0) &&
                 <p>
-                    You are not following anyone right now!
+                    {username} is not following anyone right now!
                 </p>
             }
             {

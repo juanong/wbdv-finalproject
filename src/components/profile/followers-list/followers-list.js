@@ -46,12 +46,11 @@ const FollowersList = () => {
 
     return (<div>
         <Container className={classes.container}>
-            <h2>Your followers:</h2>
+            <h2>{username}'s followers:</h2>
             {
                 (!followers || followers.length === 0) &&
                 <p>
-                    You dont have any followers yet!
-                    Hang in there! People will notice you.
+                    {username} does not have any followers yet!
                 </p>
             }
             {
@@ -64,8 +63,7 @@ const FollowersList = () => {
 
                             <ListItem alignItems="flex-start">
                                         <ListItemAvatar>
-                                            <Avatar
-                                                src={user.profilePic_url}/>
+                                            <Avatar/>
                                         </ListItemAvatar>
                                         <ListItemText
                                             primary={user.firstName + " " + user.lastName}

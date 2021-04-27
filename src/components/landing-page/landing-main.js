@@ -47,7 +47,7 @@ const LandingMain = ({recipes, imageBaseUrl, latestRecipes, user}) => {
                     <h2 className={classes.headings}>Your Recent recipes</h2>
                     {
                         latestRecipes.length === 0 &&
-                        <p>
+                        <p className={classes.headings}>
                             You haven't posted any recipes yet.
                         </p>
                     }
