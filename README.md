@@ -14,7 +14,7 @@
 
 #### Database (mongodb)
 - Start your mongodb and make sure it is in active status
-- create a collection named **"spoonful-db"**
+- create a database named **"spoonful-db"**
 
 #### Server : [Server repo](https://github.com/juanong/wbdv-finalproject-server-node/)
 - Clone the repo in your local machine 
