@@ -30,23 +30,24 @@ const ProfilePage = () => {
     useEffect(() => {
         usersService.profile()
             .then(user => {
-                return setCurrUser(user)
-            })
-        usersService.findUserByUsername(username)
-            .then(user => setUserProfile(user))
-        // reviewsService.findReviewsByAuthor(username)
-        //     .then(reviews => {
-        //         setAllReviews(reviews)
-        //         reviews.forEach(item => {
-        //             reviewsService.findRecipeById(item.recipe_id)
-        //                 .then(recipe => setRecipeNames(recipeNames => [recipe.title, ...recipeNames]))
-        //         })
-        //     })
-        reviewsService.findReviewsByAuthor(username)
-            .then(reviews => setAllReviews(reviews))
+                setCurrUser(user)
+                if (username === "undefined" || typeof username === "undefined") {
+                    setUserProfile(user)
+                    reviewsService.findReviewsByAuthor(user.username)
+                        .then(reviews => setAllReviews(reviews))
 
-        reviewsService.findRecipesByAuthor(username)
-            .then(recipes => setUserRecipes(recipes))
+                    reviewsService.findRecipesByAuthor(user.username)
+                        .then(recipes => setUserRecipes(recipes))
+                }
+            })
+        if (username !== "undefined" && typeof username !== "undefined") {
+            usersService.findUserByUsername(username)
+                .then(user => setUserProfile(user))
+            reviewsService.findReviewsByAuthor(username)
+                .then(reviews => setAllReviews(reviews))
+            reviewsService.findRecipesByAuthor(username)
+                .then(recipes => setUserRecipes(recipes))
+        }
 
     }, [])
 

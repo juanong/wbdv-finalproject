@@ -15,7 +15,7 @@ const Sidebar = ({sidebar, showSidebar, username, userLoggedIn}) => {
     }
 
     const goToProfile = (itemPath) => {
-        history.push(`/${userLoggedIn.username}${itemPath}`)
+        history.push(itemPath)
         history.go(0)
     }
 
